@@ -6,12 +6,12 @@
     <title>GeoFlood Bandung</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-    <!-- ═══ HEADER ═══════════════════════════════════════════ -->
+    <!-- ═══ HEADER ═══════════════════════════════════════════════ -->
     <header class="app-header">
         <div class="brand">
             <img src="Dokumentasi/Logo-Bandung.png" alt="Logo Kota Bandung" class="brand-logo">
@@ -23,15 +23,6 @@
 
         <div class="header-sep"></div>
 
-        <!-- PREDIKSI REALTIME -->
-        <div class="pred-badge" id="predBadge">
-            <div class="pred-dot" id="predDot"></div>
-            <span class="pred-label" id="predLabel">Memuat prediksi…</span>
-        </div>
-
-        <div class="header-sep"></div>
-
-        <!-- SEARCH -->
         <div class="search-wrap">
             <svg class="search-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                 <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
@@ -41,19 +32,7 @@
         </div>
     </header>
 
-    <!-- ═══ PREDIKSI PANEL (popup detail) ═══════════════════ -->
-    <div class="pred-panel" id="predPanel">
-        <div class="pred-panel-header">
-            <div class="pp-title">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-                Prediksi Banjir Realtime
-            </div>
-            <button class="pp-close" onclick="document.getElementById('predPanel').classList.remove('open')">✕</button>
-        </div>
-        <div id="predPanelBody" class="pred-panel-body">Memuat…</div>
-    </div>
-
-    <!-- ═══ LAYER PANEL ══════════════════════════════════════ -->
+    <!-- ═══ LAYER PANEL ══════════════════════════════════════════ -->
     <div class="layer-panel">
         <div class="panel-section">
             <div class="panel-label">Basemap</div>
@@ -92,30 +71,41 @@
         </div>
     </div>
 
-    <!-- ═══ INFO PANEL ═══════════════════════════════════════ -->
+    <!-- ═══ INFO PANEL ═══════════════════════════════════════════ -->
     <div class="info-panel" id="infoPanel">
         <button class="info-close" onclick="closeInfoPanel()">
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6 6 18M6 6l12 12"/></svg>
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M18 6 6 18M6 6l12 12"/>
+            </svg>
         </button>
-        <div class="info-badge-loc">Kelurahan</div>
+
+        <!-- Lokasi -->
+        <div class="info-loc-label">Kelurahan</div>
         <div class="info-name" id="infoName">—</div>
         <div class="info-coords" id="infoCoords">—</div>
 
-        <!-- Flood risk for this area -->
-        <div class="info-risk-row" id="infoRiskRow" style="display:none">
-            <div class="irr-label">Risiko Area</div>
-            <div class="irr-value" id="infoRiskValue">—</div>
+        <!-- Status Peringatan Dini — blok utama -->
+        <div class="alert-block" id="alertBlock">
+            <div class="alert-status-row">
+                <div class="alert-dot" id="alertDot"></div>
+                <div class="alert-status" id="alertStatus">Memuat…</div>
+            </div>
+            <div class="alert-desc" id="alertDesc"></div>
         </div>
 
-        <div class="weather-card" id="weatherCard">
-            <div class="wc-loading">Memuat cuaca…</div>
+        <!-- Faktor penilaian -->
+        <div class="factor-table" id="factorTable"></div>
+
+        <!-- Cuaca ringkas -->
+        <div class="weather-strip" id="weatherStrip">
+            <div class="ws-loading">Memuat cuaca…</div>
         </div>
     </div>
 
-    <!-- ═══ MAP ══════════════════════════════════════════════ -->
+    <!-- ═══ MAP ══════════════════════════════════════════════════ -->
     <div id="map"></div>
 
-    <!-- ═══ ZOOM ══════════════════════════════════════════════ -->
+    <!-- ═══ ZOOM ══════════════════════════════════════════════════ -->
     <div class="zoom-ctrl">
         <button onclick="map.zoomIn()">+</button>
         <button onclick="map.zoomOut()">−</button>

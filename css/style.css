@@ -22,9 +22,6 @@
     --c-waspada:  #d97706;
     --c-waspada-bg:#fffbeb;
     --c-waspada-bd:#fde68a;
-    --c-siaga:    #ca8a04;
-    --c-siaga-bg: #fefce8;
-    --c-siaga-bd: #fef08a;
     --c-aman:     #16a34a;
     --c-aman-bg:  #f0fdf4;
     --c-aman-bd:  #bbf7d0;
@@ -140,7 +137,7 @@ body, html { height: 100%; width: 100%; font-family: var(--font); overflow: hidd
 
 /* ═══ INFO PANEL ═════════════════════════════════════════════════ */
 .info-panel {
-    position: fixed; bottom: 24px; left: 16px; width: 248px;
+    position: fixed; bottom: 24px; right: 16px; width: 248px;
     background: var(--surface); border: 1px solid var(--border);
     border-radius: var(--radius); box-shadow: var(--shadow-lg); z-index: 900;
     padding: 16px;
@@ -175,7 +172,6 @@ body, html { height: 100%; width: 100%; font-family: var(--font); overflow: hidd
 }
 .alert-block.bahaya  { background: var(--c-bahaya-bg);  border-color: var(--c-bahaya-bd); }
 .alert-block.waspada { background: var(--c-waspada-bg); border-color: var(--c-waspada-bd); }
-.alert-block.siaga   { background: var(--c-siaga-bg);   border-color: var(--c-siaga-bd); }
 .alert-block.aman    { background: var(--c-aman-bg);    border-color: var(--c-aman-bd); }
 .alert-block.loading { background: var(--surface-2);    border-color: var(--border); }
 
@@ -186,7 +182,6 @@ body, html { height: 100%; width: 100%; font-family: var(--font); overflow: hidd
 }
 .alert-dot.bahaya  { background: var(--c-bahaya);  box-shadow: 0 0 0 3px rgba(220,38,38,.18); animation: blink .8s infinite; }
 .alert-dot.waspada { background: var(--c-waspada); box-shadow: 0 0 0 3px rgba(217,119,6,.18); animation: blink 1.2s infinite; }
-.alert-dot.siaga   { background: var(--c-siaga);   box-shadow: 0 0 0 3px rgba(202,138,4,.15); }
 .alert-dot.aman    { background: var(--c-aman); }
 
 @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
@@ -196,7 +191,6 @@ body, html { height: 100%; width: 100%; font-family: var(--font); overflow: hidd
 }
 .alert-status.bahaya  { color: var(--c-bahaya); }
 .alert-status.waspada { color: var(--c-waspada); }
-.alert-status.siaga   { color: var(--c-siaga); }
 .alert-status.aman    { color: var(--c-aman); }
 .alert-status.loading { color: var(--text-3); }
 
@@ -253,6 +247,7 @@ body, html { height: 100%; width: 100%; font-family: var(--font); overflow: hidd
 /* ═══ ZOOM ═══════════════════════════════════════════════════════ */
 .zoom-ctrl {
     position: fixed; right: 16px; bottom: 24px; z-index: 900;
+    transition: bottom .32s cubic-bezier(.32,.72,0,1);
     display: flex; flex-direction: column; background: var(--surface);
     border: 1px solid var(--border); border-radius: 10px; overflow: hidden;
     box-shadow: var(--shadow);

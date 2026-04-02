@@ -239,7 +239,10 @@ fetch("data/Batas-Wilayah.geojson")
       style: { color:"#94a3b8", weight:.8, fillOpacity:0, dashArray:"3,3" },
       onEachFeature: (f, l) => {
         const nama = (f.properties.desa || f.properties.NAMOBJ || "Wilayah").toUpperCase();
-        kelurahanIndex.push({ nama, layer:l });
+        // Hitung centroid kelurahan untuk zona lookup yang konsisten
+        let centroid;
+        try { const b = l.getBounds(); centroid = b.getCenter(); } catch(_) { centroid = null; }
+        kelurahanIndex.push({ nama, layer:l, centroid });
 
         l.on("mouseover", function(e) {
           this.setStyle({ weight:2.5, color:"#2563eb", dashArray:"" });
@@ -253,7 +256,10 @@ fetch("data/Batas-Wilayah.geojson")
             .then(r => r.json())
             .then(w => {
               const rain  = w.rain ? (w.rain["1h"]||0) : 0;
-              const zone  = zonaAt(e.latlng);
+              // Pakai centroid kelurahan agar zona konsisten dengan panel
+              const idx   = kelurahanIndex.find(k => k.nama === nama);
+              const zonePt = idx && idx.centroid ? idx.centroid : e.latlng;
+              const zone  = zonaAt(zonePt);
               const hasil = hitungPeringatan(rain, zone, nama);
               const warna = { bahaya:"#dc2626", waspada:"#d97706", aman:"#16a34a" }[hasil.level] || "#16a34a";
               this.setTooltipContent(`
@@ -301,7 +307,10 @@ function bukaPanel(nama, latlng) {
     .then(r => r.json())
     .then(w => {
       const rain  = w.rain ? (w.rain["1h"]||0) : 0;
-      const zone  = zonaAt(latlng);         // ← ray casting yang akurat
+      // Pakai centroid kelurahan agar zona konsisten
+      const kelEntry = kelurahanIndex.find(k => k.nama === nama);
+      const zonePt   = kelEntry && kelEntry.centroid ? kelEntry.centroid : latlng;
+      const zone     = zonaAt(zonePt);
       const hist  = HIST[nama] || 0;
       const hasil = hitungPeringatan(rain, zone, nama);
 

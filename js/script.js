@@ -1,6 +1,17 @@
+/* ═══════════════════════════════════════════════════════════════
+   GeoFlood Bandung · script.js
+
+   KALKULASI PERINGATAN DINI per kelurahan:
+     Faktor 1 — Zona Kerawanan QGIS  (point-in-polygon, ray casting)
+     Faktor 2 — Curah Hujan realtime OWM  (mm/jam)
+     Faktor 3 — Riwayat Banjir historis QGIS  (frekuensi kejadian)
+   Output: BAHAYA / WASPADA / AMAN
+   ═══════════════════════════════════════════════════════════════ */
+
 const OWM_KEY        = "c858ad50a4ac7282e4f4a25a290603b3";
 const BANDUNG_CENTER = [-6.9175, 107.6191];
 
+/* ── Frekuensi historis per kelurahan (dari Historis-Banjir QGIS) */
 const HIST = {
   "MEKAR MULYA":4,"BRAGA":2,"MARGASARI":2,"SUKAMISKIN":2,"RANCANUMPANG":2,
   "CIBADAK":2,"HEGARMANAH":2,"PAJAJARAN":2,"ANTAPANI TENGAH":1,"ANTAPANI WETAN":1,
@@ -11,6 +22,11 @@ const HIST = {
   "CIJERAH":1,"JAMIKA":1,"CITARUM":1
 };
 
+/* ─────────────────────────────────────────────────────────────────
+   POINT-IN-POLYGON  (ray casting — akurat untuk MultiPolygon)
+   Mengecek apakah titik [lng, lat] ada di dalam ring koordinat.
+   GeoJSON ring: array of [lng, lat] pairs.
+   ───────────────────────────────────────────────────────────────── */
 function pointInRing(lng, lat, ring) {
   let inside = false;
   for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
@@ -24,10 +40,12 @@ function pointInRing(lng, lat, ring) {
   return inside;
 }
 
+/* Cek titik dalam MultiPolygon (GeoJSON spec: [[outerRing, ...holes], ...]) */
 function pointInMultiPolygon(lng, lat, multiPolyCoords) {
   for (const polygon of multiPolyCoords) {
     const outerRing = polygon[0];
     if (pointInRing(lng, lat, outerRing)) {
+      // Cek lubang (holes) — jika titik ada di hole, berarti di luar
       let inHole = false;
       for (let h = 1; h < polygon.length; h++) {
         if (pointInRing(lng, lat, polygon[h])) { inHole = true; break; }
@@ -38,7 +56,15 @@ function pointInMultiPolygon(lng, lat, multiPolyCoords) {
   return false;
 }
 
-let zonaFeatures = []; 
+/* ── Zona QGIS yang akurat ──────────────────────────────────────
+   File Zona-Banjir-Bandung.geojson punya 3 feature MultiPolygon
+   (zone 0, 1, 2) yang merupakan area-area terpisah hasil analisis
+   spasial QGIS. Lookup dengan ray casting per titik.
+   Prioritas: zone 2 (bahaya) > zone 1 (waspada) > zone 0 (aman)
+   Default: -1 = di luar cakupan zona (treated as aman)
+   ─────────────────────────────────────────────────────────────── */
+let zonaFeatures = [];   // diisi setelah fetch
+
 function zonaAt(latlng) {
   if (!zonaFeatures.length) return 1;  // fallback jika data belum siap
   const lng = latlng.lng, lat = latlng.lat;
@@ -50,7 +76,7 @@ function zonaAt(latlng) {
       return priority;
     }
   }
-  return 0;
+  return 0;  // di luar semua zona = aman
 }
 
 /* ── Kalkulasi status peringatan ────────────────────────────────
@@ -292,7 +318,8 @@ function bukaPanel(nama, latlng) {
   factorTable.innerHTML   = "";
   wStrip.innerHTML        = `<div class="ws-loading">Memuat cuaca…</div>`;
   document.getElementById("infoPanel").classList.add("visible");
-  document.querySelector(".zoom-ctrl").style.bottom = "440px";
+  const isMobile = window.innerWidth <= 600;
+  document.querySelector(".zoom-ctrl").style.bottom = isMobile ? "380px" : "440px";
 
   fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latlng.lat}&lon=${latlng.lng}&appid=${OWM_KEY}&units=metric&lang=id`)
     .then(r => r.json())

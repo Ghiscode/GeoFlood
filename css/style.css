@@ -302,58 +302,81 @@ body, html { height: 100%; width: 100%; font-family: var(--font); overflow: hidd
     to   { opacity: 1; transform: translateY(0); }
 }
 
+
 /* ═══ MOBILE RESPONSIVE ══════════════════════════════════════════ */
 @media (max-width: 600px) {
 
-    /* Search bar — lebih compact */
-    .app-header { top: 12px; }
+    /* ── Search bar — proporsional seperti GMaps ─────────────────
+       Ada margin kiri kanan, tidak full width, terkesan lebih bersih */
+    .app-header {
+        top: 14px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: calc(100% - 32px);
+    }
     .search-wrap {
-        width: calc(100vw - 80px) !important;
-        height: 38px !important;
-        padding: 0 14px !important;
+        width: 100% !important;
+        height: 46px !important;
+        padding: 0 16px !important;
+        border-radius: 12px !important;
+        box-shadow: 0 2px 12px rgba(0,0,0,.12) !important;
     }
     .search-wrap:focus-within {
-        width: calc(100vw - 32px) !important;
+        width: 100% !important;
+        border-radius: 12px 12px 0 0 !important;
     }
+    .search-results {
+        border-radius: 0 0 12px 12px !important;
+    }
+    #searchInput { font-size: 14px !important; }
+    .search-icon { width: 16px !important; height: 16px !important; }
 
-    /* Layer panel — lebih kecil, pas di bawah search */
+    /* ── Layer panel — compact, lebar proporsional ───────────────
+       Tidak full width, ada margin, toggle button terlihat jelas */
     .layer-panel {
-        top: 62px;
-        left: 12px;
-        width: calc(100vw - 24px);
-        border-radius: 10px;
-    }
-
-    /* Tombol tampilkan compact */
-    .panel-toggle-btn {
-        padding: 7px 12px;
-        font-size: 10.5px;
-    }
-
-    /* Brand watermark — lebih kecil di mobile */
-    .brand-watermark {
-        bottom: 16px;
-        left: 12px;
-        padding: 5px 10px 5px 7px;
-        border-radius: 10px;
-    }
-    .bw-logo { height: 24px; width: 24px; }
-    .bw-name { font-size: 11px; }
-    .bw-sub  { font-size: 7px; }
-
-    /* Info panel — full width di bawah */
-    .info-panel {
-        left: 12px;
-        right: 12px;
+        top: 72px;
+        left: 16px;
         width: auto;
-        bottom: 16px;
-        max-height: 55vh;
+        min-width: 120px;
+        border-radius: 10px;
+    }
+    .panel-toggle-btn {
+        padding: 8px 14px;
+        font-size: 11.5px;
+        font-weight: 600;
+        gap: 6px;
+    }
+    /* Panel body tetap hidden by default — sudah dihandle JS */
+    .panel-body { padding: 4px 0; }
+    .panel-section { padding: 8px 12px; }
+
+    /* ── Brand watermark — seperti "Google Maps" di kiri bawah ──
+       Ukuran compact, tidak terlalu besar */
+    .brand-watermark {
+        bottom: 20px;
+        left: 16px;
+        padding: 6px 11px 6px 8px;
+        border-radius: 10px;
+        gap: 7px;
+    }
+    .bw-logo { height: 26px; width: 26px; }
+    .bw-name { font-size: 11.5px; }
+    .bw-sub  { font-size: 7.5px; }
+
+    /* ── Info panel — slide dari bawah, tidak overlap brand ─────── */
+    .info-panel {
+        left: 16px;
+        right: 16px;
+        width: auto;
+        bottom: 20px;
+        max-height: 60vh;
         overflow-y: auto;
+        border-radius: 14px;
     }
 
-    /* Zoom control */
+    /* ── Zoom control — kanan bawah, naik saat info panel buka ─── */
     .zoom-ctrl {
-        right: 12px;
-        bottom: 16px;
+        right: 16px;
+        bottom: 20px;
     }
 }

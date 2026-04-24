@@ -319,7 +319,10 @@ function bukaPanel(nama, latlng) {
   wStrip.innerHTML        = `<div class="ws-loading">Memuat cuaca…</div>`;
   document.getElementById("infoPanel").classList.add("visible");
   const isMobile = window.innerWidth <= 600;
-  document.querySelector(".zoom-ctrl").style.bottom = isMobile ? "380px" : "440px";
+  if (!isMobile) {
+    document.querySelector(".zoom-ctrl").style.bottom = "440px";
+  }
+  // Di mobile zoom control tidak perlu naik — info panel sudah max-height
 
   fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latlng.lat}&lon=${latlng.lng}&appid=${OWM_KEY}&units=metric&lang=id`)
     .then(r => r.json())

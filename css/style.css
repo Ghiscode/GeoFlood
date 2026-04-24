@@ -304,20 +304,17 @@ body, html { height: 100%; width: 100%; font-family: var(--font); overflow: hidd
 
 
 
+
 /* ═══ MOBILE RESPONSIVE ══════════════════════════════════════════ */
 @media (max-width: 600px) {
 
-    /* ── Safe area untuk iPhone (notch, status bar Safari) ───────
-       env(safe-area-inset-top) memberi jarak ekstra di bawah
-       status bar iPhone agar elemen tidak tertutup              */
+    /* ── Search bar ──────────────────────────────────────────── */
     .app-header {
         top: calc(14px + env(safe-area-inset-top));
         left: 50%;
         transform: translateX(-50%);
         width: calc(100% - 32px);
     }
-
-    /* Search bar — proporsional seperti GMaps */
     .search-wrap {
         width: 100% !important;
         height: 46px !important;
@@ -331,12 +328,14 @@ body, html { height: 100%; width: 100%; font-family: var(--font); overflow: hidd
     }
     .search-results {
         border-radius: 0 0 12px 12px !important;
+        /* Batasi tinggi dropdown agar tidak menutupi layar */
+        max-height: 40vh !important;
+        overflow-y: auto !important;
     }
     #searchInput  { font-size: 14px !important; }
     .search-icon  { width: 16px !important; height: 16px !important; }
 
-    /* ── Layer panel — compact, tepat di bawah search bar ────────
-       Juga pakai safe area agar ikut turun seperti search bar   */
+    /* ── Layer panel ─────────────────────────────────────────── */
     .layer-panel {
         top: calc(72px + env(safe-area-inset-top));
         left: 16px;
@@ -350,11 +349,10 @@ body, html { height: 100%; width: 100%; font-family: var(--font); overflow: hidd
         font-weight: 600;
         gap: 6px;
     }
-    .panel-body   { padding: 4px 0; }
+    .panel-body    { padding: 4px 0; }
     .panel-section { padding: 8px 12px; }
 
-    /* ── Brand watermark — kiri bawah, hindari safe area bawah ──
-       env(safe-area-inset-bottom) untuk iPhone dengan home bar  */
+    /* ── Brand watermark ─────────────────────────────────────── */
     .brand-watermark {
         bottom: calc(20px + env(safe-area-inset-bottom));
         left: 16px;
@@ -368,15 +366,27 @@ body, html { height: 100%; width: 100%; font-family: var(--font); overflow: hidd
     .bw-name { font-size: 11.5px; }
     .bw-sub  { font-size: 7.5px; }
 
-    /* ── Info panel — slide dari bawah ───────────────────────── */
+    /* ── Info panel ──────────────────────────────────────────────
+       Kunci utama: max-height diperkecil dan bottom diperhitungkan
+       dari safe area + tinggi address bar Safari (~85px)         */
     .info-panel {
-        left: 16px;
-        right: 16px;
+        left: 12px;
+        right: 12px;
         width: auto;
-        bottom: calc(20px + env(safe-area-inset-bottom));
-        max-height: 60vh;
+        /* Posisi bottom: safe area + sedikit jarak */
+        bottom: calc(12px + env(safe-area-inset-bottom));
+        /* Max height: kurangi area atas (search+panel ~130px)
+           dan area bawah (address bar Safari ~85px)              */
+        max-height: calc(100vh - 220px - env(safe-area-inset-top) - env(safe-area-inset-bottom));
         overflow-y: auto;
         border-radius: 14px;
+        /* Scrollbar tipis untuk iOS */
+        -webkit-overflow-scrolling: touch;
+    }
+    /* Padding bawah dalam panel agar konten tidak terpotong
+       oleh home indicator saat di-scroll ke bawah             */
+    .info-panel .weather-strip {
+        margin-bottom: 4px;
     }
 
     /* ── Zoom control ─────────────────────────────────────────── */

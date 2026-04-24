@@ -143,6 +143,17 @@ function kondisiCuaca(weatherId, rainMM) {
   return "Cerah";
 }
 
+
+/* ═══ TOGGLE LAYER PANEL ════════════════════════════════════════ */
+let panelOpen = true;
+function toggleLayerPanel() {
+  panelOpen = !panelOpen;
+  const body  = document.getElementById("panelBody");
+  const label = document.getElementById("panelToggleLabel");
+  body.classList.toggle("hidden", !panelOpen);
+  label.textContent = panelOpen ? "Sembunyikan" : "Tampilkan";
+}
+
 /* ═══ MAP INIT ══════════════════════════════════════════════════ */
 const map = L.map("map", { zoomControl:false, attributionControl:false })
     .setView(BANDUNG_CENTER, 13);
@@ -390,17 +401,17 @@ document.querySelectorAll(".bmap-btn").forEach(btn => {
 function setHighlight(layer) {
   // Kembalikan style layer sebelumnya
   if (highlightLayer) {
-    highlightLayer.setStyle({ color:"#94a3b8", weight:.8, fillOpacity:0, dashArray:"3,3" });
+    highlightLayer.setStyle({ color:"#94a3b8", weight:.8, fillOpacity:0, fillColor:"transparent", dashArray:"3,3" });
   }
   // Terapkan highlight ke layer baru
-  layer.setStyle({ color:"#2563eb", weight:2.5, fillOpacity:0.08, fillColor:"#2563eb", dashArray:"" });
+  layer.setStyle({ color:"#16a34a", weight:3, fillOpacity:0.1, fillColor:"#16a34a", dashArray:"" });
   layer.bringToFront();
   highlightLayer = layer;
 }
 
 function clearHighlight() {
   if (highlightLayer) {
-    highlightLayer.setStyle({ color:"#94a3b8", weight:.8, fillOpacity:0, dashArray:"3,3" });
+    highlightLayer.setStyle({ color:"#94a3b8", weight:.8, fillOpacity:0, fillColor:"transparent", dashArray:"3,3" });
     highlightLayer = null;
   }
 }

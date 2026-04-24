@@ -11,18 +11,8 @@
 </head>
 <body>
 
-    <!-- ═══ HEADER ═══════════════════════════════════════════════ -->
+    <!-- ═══ HEADER — hanya search bar ══════════════════════════ -->
     <header class="app-header">
-        <div class="brand">
-            <img src="Dokumentasi/Logo-Bandung.png" alt="Logo Kota Bandung" class="brand-logo">
-            <div class="brand-text">
-                <div class="brand-name">GeoFlood <span>Kota Bandung</span></div>
-                <div class="brand-sub">SIG Pemetaan Kerawanan Banjir Terintegrasi</div>
-            </div>
-        </div>
-
-        <div class="header-sep"></div>
-
         <div class="search-wrap">
             <svg class="search-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                 <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
@@ -33,41 +23,61 @@
     </header>
 
     <!-- ═══ LAYER PANEL ══════════════════════════════════════════ -->
-    <div class="layer-panel">
-        <div class="panel-section">
-            <div class="panel-label">Basemap</div>
-            <div class="basemap-options">
-                <button class="bmap-btn" data-map="streets">Jalan</button>
-                <button class="bmap-btn" data-map="satellite">Satelit</button>
-                <button class="bmap-btn active" data-map="light">Minimal</button>
+    <div class="layer-panel" id="layerPanel">
+
+        <!-- Tombol toggle panel -->
+        <button class="panel-toggle-btn" id="panelToggleBtn" onclick="toggleLayerPanel()">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M3 6h18M3 12h18M3 18h18"/>
+            </svg>
+            <span id="panelToggleLabel">Sembunyikan</span>
+        </button>
+
+        <div class="panel-body" id="panelBody">
+            <div class="panel-section">
+                <div class="panel-label">Basemap</div>
+                <div class="basemap-options">
+                    <button class="bmap-btn" data-map="streets">Jalan</button>
+                    <button class="bmap-btn" data-map="satellite">Satelit</button>
+                    <button class="bmap-btn active" data-map="light">Minimal</button>
+                </div>
+            </div>
+            <div class="divider"></div>
+            <div class="panel-section">
+                <div class="panel-label">Layer Peta</div>
+                <label class="toggle-row">
+                    <div class="toggle-info"><span class="dot" style="background:#f87171"></span>Zona Kerawanan</div>
+                    <div class="toggle on" data-layer="zona"><div class="toggle-thumb"></div></div>
+                </label>
+                <label class="toggle-row">
+                    <div class="toggle-info"><span class="dot" style="background:#60a5fa"></span>Aliran Sungai</div>
+                    <div class="toggle on" data-layer="sungai"><div class="toggle-thumb"></div></div>
+                </label>
+                <label class="toggle-row">
+                    <div class="toggle-info"><span class="dot" style="background:#94a3b8"></span>Batas Wilayah</div>
+                    <div class="toggle on" data-layer="batas"><div class="toggle-thumb"></div></div>
+                </label>
+                <label class="toggle-row">
+                    <div class="toggle-info"><span class="dot" style="background:#ef4444"></span>Titik Kejadian</div>
+                    <div class="toggle on" data-layer="historis"><div class="toggle-thumb"></div></div>
+                </label>
+            </div>
+            <div class="divider"></div>
+            <div class="panel-section">
+                <div class="panel-label">Legenda Zona</div>
+                <div class="legend-item"><span class="leg-swatch" style="background:#fca5a5"></span>Bahaya</div>
+                <div class="legend-item"><span class="leg-swatch" style="background:#fcd34d"></span>Waspada</div>
+                <div class="legend-item"><span class="leg-swatch" style="background:#86efac"></span>Aman</div>
             </div>
         </div>
-        <div class="divider"></div>
-        <div class="panel-section">
-            <div class="panel-label">Layer Peta</div>
-            <label class="toggle-row">
-                <div class="toggle-info"><span class="dot" style="background:#f87171"></span>Zona Kerawanan</div>
-                <div class="toggle on" data-layer="zona"><div class="toggle-thumb"></div></div>
-            </label>
-            <label class="toggle-row">
-                <div class="toggle-info"><span class="dot" style="background:#60a5fa"></span>Aliran Sungai</div>
-                <div class="toggle on" data-layer="sungai"><div class="toggle-thumb"></div></div>
-            </label>
-            <label class="toggle-row">
-                <div class="toggle-info"><span class="dot" style="background:#94a3b8"></span>Batas Wilayah</div>
-                <div class="toggle on" data-layer="batas"><div class="toggle-thumb"></div></div>
-            </label>
-            <label class="toggle-row">
-                <div class="toggle-info"><span class="dot" style="background:#ef4444"></span>Titik Kejadian</div>
-                <div class="toggle on" data-layer="historis"><div class="toggle-thumb"></div></div>
-            </label>
-        </div>
-        <div class="divider"></div>
-        <div class="panel-section">
-            <div class="panel-label">Legenda Zona</div>
-            <div class="legend-item"><span class="leg-swatch" style="background:#fca5a5"></span>Bahaya</div>
-            <div class="legend-item"><span class="leg-swatch" style="background:#fcd34d"></span>Waspada</div>
-            <div class="legend-item"><span class="leg-swatch" style="background:#86efac"></span>Aman</div>
+    </div>
+
+    <!-- ═══ BRAND — pojok kiri bawah seperti Google Maps ═══════ -->
+    <div class="brand-watermark">
+        <img src="Logo-Bandung.png" alt="Logo Kota Bandung" class="bw-logo">
+        <div class="bw-text">
+            <div class="bw-name">GeoFlood <span>Kota Bandung</span></div>
+            <div class="bw-sub">SIG Pemetaan Kerawanan Banjir</div>
         </div>
     </div>
 
@@ -78,13 +88,9 @@
                 <path d="M18 6 6 18M6 6l12 12"/>
             </svg>
         </button>
-
-        <!-- Lokasi -->
         <div class="info-loc-label">Kelurahan</div>
         <div class="info-name" id="infoName">—</div>
         <div class="info-coords" id="infoCoords">—</div>
-
-        <!-- Status Peringatan Dini — blok utama -->
         <div class="alert-block" id="alertBlock">
             <div class="alert-status-row">
                 <div class="alert-dot" id="alertDot"></div>
@@ -92,11 +98,7 @@
             </div>
             <div class="alert-desc" id="alertDesc"></div>
         </div>
-
-        <!-- Faktor penilaian -->
         <div class="factor-table" id="factorTable"></div>
-
-        <!-- Cuaca ringkas -->
         <div class="weather-strip" id="weatherStrip">
             <div class="ws-loading">Memuat cuaca…</div>
         </div>
@@ -105,16 +107,13 @@
     <!-- ═══ MAP ══════════════════════════════════════════════════ -->
     <div id="map"></div>
 
-    <!-- ═══ ZOOM ══════════════════════════════════════════════════ -->
+    <!-- ═══ ZOOM ═════════════════════════════════════════════════ -->
     <div class="zoom-ctrl">
         <button onclick="map.zoomIn()">+</button>
         <button onclick="map.zoomOut()">−</button>
     </div>
 
-
-
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="js/script.js"></script>
 </body>
 </html>
-<!-- dummy to check EOF -->

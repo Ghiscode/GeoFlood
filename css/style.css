@@ -303,17 +303,21 @@ body, html { height: 100%; width: 100%; font-family: var(--font); overflow: hidd
 }
 
 
+
 /* ═══ MOBILE RESPONSIVE ══════════════════════════════════════════ */
 @media (max-width: 600px) {
 
-    /* ── Search bar — proporsional seperti GMaps ─────────────────
-       Ada margin kiri kanan, tidak full width, terkesan lebih bersih */
+    /* ── Safe area untuk iPhone (notch, status bar Safari) ───────
+       env(safe-area-inset-top) memberi jarak ekstra di bawah
+       status bar iPhone agar elemen tidak tertutup              */
     .app-header {
-        top: 14px;
+        top: calc(14px + env(safe-area-inset-top));
         left: 50%;
         transform: translateX(-50%);
         width: calc(100% - 32px);
     }
+
+    /* Search bar — proporsional seperti GMaps */
     .search-wrap {
         width: 100% !important;
         height: 46px !important;
@@ -328,16 +332,16 @@ body, html { height: 100%; width: 100%; font-family: var(--font); overflow: hidd
     .search-results {
         border-radius: 0 0 12px 12px !important;
     }
-    #searchInput { font-size: 14px !important; }
-    .search-icon { width: 16px !important; height: 16px !important; }
+    #searchInput  { font-size: 14px !important; }
+    .search-icon  { width: 16px !important; height: 16px !important; }
 
-    /* ── Layer panel — compact, lebar proporsional ───────────────
-       Tidak full width, ada margin, toggle button terlihat jelas */
+    /* ── Layer panel — compact, tepat di bawah search bar ────────
+       Juga pakai safe area agar ikut turun seperti search bar   */
     .layer-panel {
-        top: 72px;
+        top: calc(72px + env(safe-area-inset-top));
         left: 16px;
         width: auto;
-        min-width: 120px;
+        min-width: 130px;
         border-radius: 10px;
     }
     .panel-toggle-btn {
@@ -346,37 +350,38 @@ body, html { height: 100%; width: 100%; font-family: var(--font); overflow: hidd
         font-weight: 600;
         gap: 6px;
     }
-    /* Panel body tetap hidden by default — sudah dihandle JS */
-    .panel-body { padding: 4px 0; }
+    .panel-body   { padding: 4px 0; }
     .panel-section { padding: 8px 12px; }
 
-    /* ── Brand watermark — seperti "Google Maps" di kiri bawah ──
-       Ukuran compact, tidak terlalu besar */
+    /* ── Brand watermark — kiri bawah, hindari safe area bawah ──
+       env(safe-area-inset-bottom) untuk iPhone dengan home bar  */
     .brand-watermark {
-        bottom: 20px;
+        bottom: calc(20px + env(safe-area-inset-bottom));
         left: 16px;
         padding: 6px 11px 6px 8px;
         border-radius: 10px;
         gap: 7px;
+        -webkit-backdrop-filter: blur(8px);
+        backdrop-filter: blur(8px);
     }
     .bw-logo { height: 26px; width: 26px; }
     .bw-name { font-size: 11.5px; }
     .bw-sub  { font-size: 7.5px; }
 
-    /* ── Info panel — slide dari bawah, tidak overlap brand ─────── */
+    /* ── Info panel — slide dari bawah ───────────────────────── */
     .info-panel {
         left: 16px;
         right: 16px;
         width: auto;
-        bottom: 20px;
+        bottom: calc(20px + env(safe-area-inset-bottom));
         max-height: 60vh;
         overflow-y: auto;
         border-radius: 14px;
     }
 
-    /* ── Zoom control — kanan bawah, naik saat info panel buka ─── */
+    /* ── Zoom control ─────────────────────────────────────────── */
     .zoom-ctrl {
         right: 16px;
-        bottom: 20px;
+        bottom: calc(20px + env(safe-area-inset-bottom));
     }
 }

@@ -1,17 +1,6 @@
-/* ═══════════════════════════════════════════════════════════════
-   GeoFlood Bandung · script.js
-
-   KALKULASI PERINGATAN DINI per kelurahan:
-     Faktor 1 — Zona Kerawanan QGIS  (point-in-polygon, ray casting)
-     Faktor 2 — Curah Hujan realtime OWM  (mm/jam)
-     Faktor 3 — Riwayat Banjir historis QGIS  (frekuensi kejadian)
-   Output: BAHAYA / WASPADA / AMAN
-   ═══════════════════════════════════════════════════════════════ */
-
 const OWM_KEY        = "c858ad50a4ac7282e4f4a25a290603b3";
 const BANDUNG_CENTER = [-6.9175, 107.6191];
 
-/* ── Frekuensi historis per kelurahan (dari Historis-Banjir QGIS) */
 const HIST = {
   "MEKAR MULYA":4,"BRAGA":2,"MARGASARI":2,"SUKAMISKIN":2,"RANCANUMPANG":2,
   "CIBADAK":2,"HEGARMANAH":2,"PAJAJARAN":2,"ANTAPANI TENGAH":1,"ANTAPANI WETAN":1,
@@ -22,11 +11,6 @@ const HIST = {
   "CIJERAH":1,"JAMIKA":1,"CITARUM":1
 };
 
-/* ─────────────────────────────────────────────────────────────────
-   POINT-IN-POLYGON  (ray casting — akurat untuk MultiPolygon)
-   Mengecek apakah titik [lng, lat] ada di dalam ring koordinat.
-   GeoJSON ring: array of [lng, lat] pairs.
-   ───────────────────────────────────────────────────────────────── */
 function pointInRing(lng, lat, ring) {
   let inside = false;
   for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
@@ -40,12 +24,10 @@ function pointInRing(lng, lat, ring) {
   return inside;
 }
 
-/* Cek titik dalam MultiPolygon (GeoJSON spec: [[outerRing, ...holes], ...]) */
 function pointInMultiPolygon(lng, lat, multiPolyCoords) {
   for (const polygon of multiPolyCoords) {
     const outerRing = polygon[0];
     if (pointInRing(lng, lat, outerRing)) {
-      // Cek lubang (holes) — jika titik ada di hole, berarti di luar
       let inHole = false;
       for (let h = 1; h < polygon.length; h++) {
         if (pointInRing(lng, lat, polygon[h])) { inHole = true; break; }
@@ -55,36 +37,20 @@ function pointInMultiPolygon(lng, lat, multiPolyCoords) {
   }
   return false;
 }
-
-/* ── Zona QGIS yang akurat ──────────────────────────────────────
-   File Zona-Banjir-Bandung.geojson punya 3 feature MultiPolygon
-   (zone 0, 1, 2) yang merupakan area-area terpisah hasil analisis
-   spasial QGIS. Lookup dengan ray casting per titik.
-   Prioritas: zone 2 (bahaya) > zone 1 (waspada) > zone 0 (aman)
-   Default: -1 = di luar cakupan zona (treated as aman)
-   ─────────────────────────────────────────────────────────────── */
-let zonaFeatures = [];   // diisi setelah fetch
-
+let zonaFeatures = [];
 function zonaAt(latlng) {
-  if (!zonaFeatures.length) return 1;  // fallback jika data belum siap
+  if (!zonaFeatures.length) return 1;
   const lng = latlng.lng, lat = latlng.lat;
 
-  // Cek prioritas tertinggi dulu (bahaya > waspada > aman)
   for (const priority of [2, 1, 0]) {
     const feat = zonaFeatures.find(f => f.properties.zone === priority);
     if (feat && pointInMultiPolygon(lng, lat, feat.geometry.coordinates)) {
       return priority;
     }
   }
-  return 0;  // di luar semua zona = aman
+  return 0;
 }
 
-/* ── Kalkulasi status peringatan ────────────────────────────────
-   Bobot:
-     Zona QGIS    40% — kerentanan spasial dari analisis QGIS
-     Curah Hujan  40% — kondisi cuaca aktual realtime OWM
-     Riwayat      20% — frekuensi kejadian banjir historis
-   ─────────────────────────────────────────────────────────────── */
 function hitungPeringatan(rainMM, zoneLevel, kelurahan) {
   const nZona  = zoneLevel === 2 ? 1.0 : zoneLevel === 1 ? 0.5 : 0.0;
   const nHujan = Math.min(rainMM / 20, 1.0);
@@ -107,9 +73,6 @@ const ALERT_DESC = {
 const ZONA_LABEL = { 0:"Aman", 1:"Waspada", 2:"Bahaya" };
 
 
-/* ── Terjemahan kondisi cuaca ke bahasa umum ────────────────────
-   Berdasarkan OWM weather condition ID:
-   https://openweathermap.org/weather-conditions               */
 function kondisiCuaca(weatherId, rainMM) {
   // Thunderstorm (2xx)
   if (weatherId >= 200 && weatherId < 300) return "Hujan Petir";
@@ -143,8 +106,6 @@ function kondisiCuaca(weatherId, rainMM) {
   return "Cerah";
 }
 
-
-/* ═══ TOGGLE LAYER PANEL ════════════════════════════════════════ */
 let panelOpen = false;
 function toggleLayerPanel() {
   panelOpen = !panelOpen;
@@ -154,13 +115,11 @@ function toggleLayerPanel() {
   label.textContent = panelOpen ? "Sembunyikan" : "Tampilkan";
 }
 
-// Default: panel tersembunyi saat halaman dibuka
 document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("panelBody").classList.add("hidden");
   document.getElementById("panelToggleLabel").textContent = "Tampilkan";
 });
 
-/* ═══ MAP INIT ══════════════════════════════════════════════════ */
 const map = L.map("map", { zoomControl:false, attributionControl:false })
     .setView(BANDUNG_CENTER, 13);
 
@@ -185,13 +144,11 @@ const layers = {
 };
 
 let kelurahanIndex = [];
-let highlightLayer = null;  // layer batas yang sedang di-highlight
-
-/* ═══ 1. ZONA KERAWANAN (QGIS) ══════════════════════════════════ */
+let highlightLayer = null;
 fetch("data/Zona-Banjir-Bandung.geojson")
   .then(r => r.json())
   .then(data => {
-    zonaFeatures = data.features;   // simpan untuk ray casting
+    zonaFeatures = data.features;
     L.geoJSON(data, {
       pane:"paneZona", interactive:false,
       style: f => ({
@@ -202,7 +159,6 @@ fetch("data/Zona-Banjir-Bandung.geojson")
     }).addTo(layers.zona);
   });
 
-/* ═══ 2. SUNGAI ═════════════════════════════════════════════════ */
 fetch("data/Sungai-Bandung.geojson")
   .then(r => r.json())
   .then(data => {
@@ -215,7 +171,6 @@ fetch("data/Sungai-Bandung.geojson")
     }).addTo(layers.sungai);
   });
 
-/* ═══ 3. HISTORIS BANJIR (QGIS) ════════════════════════════════ */
 fetch("data/Historis-Banjir.geojson")
   .then(r => r.json())
   .then(data => {
@@ -247,7 +202,6 @@ fetch("data/Historis-Banjir.geojson")
     }).addTo(layers.historis);
   });
 
-/* ═══ 4. BATAS WILAYAH ══════════════════════════════════════════ */
 fetch("data/Batas-Wilayah.geojson")
   .then(r => r.json())
   .then(data => {
@@ -256,7 +210,6 @@ fetch("data/Batas-Wilayah.geojson")
       style: { color:"#94a3b8", weight:.8, fillOpacity:0, dashArray:"3,3" },
       onEachFeature: (f, l) => {
         const nama = (f.properties.desa || f.properties.NAMOBJ || "Wilayah").toUpperCase();
-        // Hitung centroid kelurahan untuk zona lookup yang konsisten
         let centroid;
         try { const b = l.getBounds(); centroid = b.getCenter(); } catch(_) { centroid = null; }
         kelurahanIndex.push({ nama, layer:l, centroid });
@@ -297,7 +250,6 @@ fetch("data/Batas-Wilayah.geojson")
     }).addTo(layers.batas);
   });
 
-/* ═══ INFO PANEL ════════════════════════════════════════════════ */
 function bukaPanel(nama, latlng) {
   document.getElementById("infoName").textContent   = nama;
   document.getElementById("infoCoords").textContent =
@@ -322,27 +274,23 @@ function bukaPanel(nama, latlng) {
   if (!isMobile) {
     document.querySelector(".zoom-ctrl").style.bottom = "440px";
   }
-  // Di mobile zoom control tidak perlu naik — info panel sudah max-height
 
   fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latlng.lat}&lon=${latlng.lng}&appid=${OWM_KEY}&units=metric&lang=id`)
     .then(r => r.json())
     .then(w => {
       const rain  = w.rain ? (w.rain["1h"]||0) : 0;
-      // Pakai centroid kelurahan agar zona konsisten
       const kelEntry = kelurahanIndex.find(k => k.nama === nama);
       const zonePt   = kelEntry && kelEntry.centroid ? kelEntry.centroid : latlng;
       const zone     = zonaAt(zonePt);
       const hist  = HIST[nama] || 0;
       const hasil = hitungPeringatan(rain, zone, nama);
 
-      // Alert block
       alertBlock.className    = `alert-block ${hasil.level}`;
       alertDot.className      = `alert-dot ${hasil.level}`;
       alertStatus.className   = `alert-status ${hasil.level}`;
       alertStatus.textContent = hasil.label;
       alertDesc.textContent   = ALERT_DESC[hasil.level];
 
-      // Faktor tabel — zona dari ray casting QGIS yang akurat
       const zonaKls = { 0:"aman", 1:"waspada", 2:"bahaya" }[zone];
       factorTable.innerHTML = `
         <div class="ft-row">
@@ -359,7 +307,6 @@ function bukaPanel(nama, latlng) {
         </div>
       `;
 
-      // Weather strip
       wStrip.innerHTML = `
         <div class="ws-desc">${kondisiCuaca(w.weather[0].id, rain)}</div>
         <div class="ws-row">
@@ -386,7 +333,6 @@ function closeInfoPanel() {
   clearHighlight();
 }
 
-/* ═══ LAYER TOGGLES ═════════════════════════════════════════════ */
 document.querySelectorAll(".toggle").forEach(t => {
   t.addEventListener("click", () => {
     const isOn = t.classList.toggle("on");
@@ -394,7 +340,6 @@ document.querySelectorAll(".toggle").forEach(t => {
   });
 });
 
-/* ═══ BASEMAP ═══════════════════════════════════════════════════ */
 document.querySelectorAll(".bmap-btn").forEach(btn => {
   btn.addEventListener("click", () => {
     const key = btn.dataset.map;
@@ -407,13 +352,10 @@ document.querySelectorAll(".bmap-btn").forEach(btn => {
   });
 });
 
-/* ═══ HIGHLIGHT WILAYAH ════════════════════════════════════════ */
 function setHighlight(layer) {
-  // Kembalikan style layer sebelumnya
   if (highlightLayer) {
     highlightLayer.setStyle({ color:"#94a3b8", weight:.8, fillOpacity:0, fillColor:"transparent", dashArray:"3,3" });
   }
-  // Terapkan highlight ke layer baru
   layer.setStyle({ color:"#16a34a", weight:3, fillOpacity:0.1, fillColor:"#16a34a", dashArray:"" });
   layer.bringToFront();
   highlightLayer = layer;
@@ -454,7 +396,6 @@ searchInput.addEventListener("input", () => {
         const b = layer.getBounds();
         map.flyToBounds(b, { padding:[60,60], maxZoom:15, duration:1 });
 
-        // Highlight batas wilayah yang dipilih
         setHighlight(layer);
 
         bukaPanel(nama, b.getCenter());

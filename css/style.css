@@ -37,16 +37,14 @@
 body, html { height: 100%; width: 100%; font-family: var(--font); overflow: hidden; background: #eef2f7; }
 #map { position: fixed; inset: 0; z-index: 0; }
 
-/* ═══ HEADER ═════════════════════════════════════════════════════
-   Hanya logo + judul + search bar                                 */
-/* Header — hanya search bar */
+/* Search Bar*/
 .app-header {
     position: fixed; top: 16px; left: 50%; transform: translateX(-50%);
     z-index: 1000;
     max-width: calc(100vw - 32px);
 }
 
-/* Brand watermark — pojok kiri bawah seperti Google Maps */
+/* Brand watermark */
 .brand-watermark {
     position: fixed; bottom: 24px; left: 16px;
     z-index: 800;
@@ -66,7 +64,7 @@ body, html { height: 100%; width: 100%; font-family: var(--font); overflow: hidd
 .bw-name span { color: var(--blue); }
 .bw-sub  { font-size: 8px; color: var(--text-3); letter-spacing: .04em; text-transform: uppercase; font-weight: 500; white-space: nowrap; }
 
-/* Search — standalone pill di tengah atas */
+/* Result search bar */
 .search-wrap {
     position: relative; display: flex; align-items: center;
     background: var(--surface); border: 1px solid var(--border);
@@ -105,7 +103,7 @@ body, html { height: 100%; width: 100%; font-family: var(--font); overflow: hidd
     display: flex; align-items: center; justify-content: center; color: var(--blue); flex-shrink: 0;
 }
 
-/* ═══ LAYER PANEL ════════════════════════════════════════════════ */
+/*  LAYER PANEL */
 .layer-panel {
     position: fixed; top: 72px; left: 16px; width: 214px;
     background: var(--surface); border: 1px solid var(--border);
@@ -113,7 +111,7 @@ body, html { height: 100%; width: 100%; font-family: var(--font); overflow: hidd
     overflow: hidden;
 }
 
-/* Tombol toggle sembunyikan/tampilkan */
+/* On/Of Panel Legenda*/
 .panel-toggle-btn {
     display: flex; align-items: center; gap: 7px;
     width: 100%; padding: 9px 14px;
@@ -126,7 +124,6 @@ body, html { height: 100%; width: 100%; font-family: var(--font); overflow: hidd
 .panel-toggle-btn:hover { background: var(--surface-3); color: var(--text); }
 .panel-toggle-btn svg { flex-shrink: 0; color: var(--text-3); }
 
-/* Body panel yang bisa disembunyikan */
 .panel-body {
     overflow: hidden;
     max-height: 600px;
@@ -167,7 +164,7 @@ body, html { height: 100%; width: 100%; font-family: var(--font); overflow: hidd
 .legend-item { display: flex; align-items: center; gap: 8px; font-size: 11.5px; color: var(--text-2); padding: 3px 0; }
 .leg-swatch { width: 26px; height: 11px; border-radius: 3px; flex-shrink: 0; opacity: .85; border: 1px solid rgba(0,0,0,.06); }
 
-/* ═══ INFO PANEL ═════════════════════════════════════════════════ */
+/*  INFO PANEL*/
 .info-panel {
     position: fixed; bottom: 24px; right: 16px; width: 248px;
     background: var(--surface); border: 1px solid var(--border);
@@ -194,7 +191,6 @@ body, html { height: 100%; width: 100%; font-family: var(--font); overflow: hidd
 .info-name { font-size: 14px; font-weight: 700; color: var(--text); line-height: 1.2; padding-right: 22px; margin-bottom: 3px; }
 .info-coords { font-family: var(--mono); font-size: 9px; color: var(--text-3); margin-bottom: 12px; }
 
-/* ── ALERT BLOCK (status peringatan dini) ───────────────────── */
 .alert-block {
     border-radius: var(--radius-sm);
     padding: 11px 13px;
@@ -228,7 +224,6 @@ body, html { height: 100%; width: 100%; font-family: var(--font); overflow: hidd
 
 .alert-desc { font-size: 11px; color: var(--text-2); line-height: 1.5; }
 
-/* ── FACTOR TABLE ────────────────────────────────────────────── */
 .factor-table {
     border: 1px solid var(--border-2);
     border-radius: var(--radius-sm);
@@ -247,7 +242,6 @@ body, html { height: 100%; width: 100%; font-family: var(--font); overflow: hidd
 .ft-val.waspada { color: var(--c-waspada); }
 .ft-val.aman    { color: var(--c-aman); }
 
-/* ── WEATHER STRIP ───────────────────────────────────────────── */
 .weather-strip {
     background: var(--blue-lt); border: 1px solid var(--blue-bd);
     border-radius: var(--radius-sm); padding: 10px 12px;
@@ -263,7 +257,6 @@ body, html { height: 100%; width: 100%; font-family: var(--font); overflow: hidd
 .ws-val  { font-size: 13px; font-weight: 700; color: var(--text); font-family: var(--mono); }
 .ws-unit { font-size: 9px; color: var(--text-3); text-transform: uppercase; letter-spacing: .05em; }
 
-/* ═══ TOOLTIP ════════════════════════════════════════════════════ */
 .leaflet-tooltip.geo-tt {
     background: var(--surface) !important; border: 1px solid var(--border) !important;
     border-left: 3px solid var(--blue) !important; border-radius: var(--radius-sm) !important;
@@ -276,7 +269,6 @@ body, html { height: 100%; width: 100%; font-family: var(--font); overflow: hidd
 .tt-alert { font-size: 11px; font-weight: 700; margin-bottom: 3px; }
 .tt-stats { font-size: 10.5px; color: var(--text-2); line-height: 1.6; }
 
-/* ═══ ZOOM ═══════════════════════════════════════════════════════ */
 .zoom-ctrl {
     position: fixed; right: 16px; bottom: 24px; z-index: 900;
     transition: bottom .32s cubic-bezier(.32,.72,0,1);
@@ -293,7 +285,6 @@ body, html { height: 100%; width: 100%; font-family: var(--font); overflow: hidd
 .zoom-ctrl button:first-child { border-bottom: 1px solid var(--border-2); }
 .zoom-ctrl button:hover { background: var(--surface-2); color: var(--text); }
 
-/* ═══ MISC ═══════════════════════════════════════════════════════ */
 .leaflet-control-attribution { display: none !important; }
 .leaflet-control-zoom        { display: none !important; }
 
@@ -302,13 +293,10 @@ body, html { height: 100%; width: 100%; font-family: var(--font); overflow: hidd
     to   { opacity: 1; transform: translateY(0); }
 }
 
-
-
-
-/* ═══ MOBILE RESPONSIVE ══════════════════════════════════════════ */
+/* MOBILE RESPONSIVE */
 @media (max-width: 600px) {
 
-    /* ── Search bar ──────────────────────────────────────────── */
+    /* Search bar*/
     .app-header {
         top: calc(14px + env(safe-area-inset-top));
         left: 50%;
@@ -328,14 +316,12 @@ body, html { height: 100%; width: 100%; font-family: var(--font); overflow: hidd
     }
     .search-results {
         border-radius: 0 0 12px 12px !important;
-        /* Batasi tinggi dropdown agar tidak menutupi layar */
         max-height: 40vh !important;
         overflow-y: auto !important;
     }
     #searchInput  { font-size: 14px !important; }
     .search-icon  { width: 16px !important; height: 16px !important; }
 
-    /* ── Layer panel ─────────────────────────────────────────── */
     .layer-panel {
         top: calc(72px + env(safe-area-inset-top));
         left: 16px;
@@ -352,7 +338,6 @@ body, html { height: 100%; width: 100%; font-family: var(--font); overflow: hidd
     .panel-body    { padding: 4px 0; }
     .panel-section { padding: 8px 12px; }
 
-    /* ── Brand watermark ─────────────────────────────────────── */
     .brand-watermark {
         bottom: calc(20px + env(safe-area-inset-bottom));
         left: 16px;
@@ -366,30 +351,21 @@ body, html { height: 100%; width: 100%; font-family: var(--font); overflow: hidd
     .bw-name { font-size: 11.5px; }
     .bw-sub  { font-size: 7.5px; }
 
-    /* ── Info panel ──────────────────────────────────────────────
-       Kunci utama: max-height diperkecil dan bottom diperhitungkan
-       dari safe area + tinggi address bar Safari (~85px)         */
     .info-panel {
         left: 12px;
         right: 12px;
         width: auto;
-        /* Posisi bottom: safe area + sedikit jarak */
         bottom: calc(12px + env(safe-area-inset-bottom));
-        /* Max height: kurangi area atas (search+panel ~130px)
-           dan area bawah (address bar Safari ~85px)              */
         max-height: calc(100vh - 220px - env(safe-area-inset-top) - env(safe-area-inset-bottom));
         overflow-y: auto;
         border-radius: 14px;
         /* Scrollbar tipis untuk iOS */
         -webkit-overflow-scrolling: touch;
     }
-    /* Padding bawah dalam panel agar konten tidak terpotong
-       oleh home indicator saat di-scroll ke bawah             */
     .info-panel .weather-strip {
         margin-bottom: 4px;
     }
 
-    /* ── Zoom control ─────────────────────────────────────────── */
     .zoom-ctrl {
         right: 16px;
         bottom: calc(20px + env(safe-area-inset-bottom));

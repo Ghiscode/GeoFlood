@@ -301,3 +301,59 @@ body, html { height: 100%; width: 100%; font-family: var(--font); overflow: hidd
     from { opacity: 0; transform: translateY(-6px); }
     to   { opacity: 1; transform: translateY(0); }
 }
+
+/* ═══ MOBILE RESPONSIVE ══════════════════════════════════════════ */
+@media (max-width: 600px) {
+
+    /* Search bar — lebih compact */
+    .app-header { top: 12px; }
+    .search-wrap {
+        width: calc(100vw - 80px) !important;
+        height: 38px !important;
+        padding: 0 14px !important;
+    }
+    .search-wrap:focus-within {
+        width: calc(100vw - 32px) !important;
+    }
+
+    /* Layer panel — lebih kecil, pas di bawah search */
+    .layer-panel {
+        top: 62px;
+        left: 12px;
+        width: calc(100vw - 24px);
+        border-radius: 10px;
+    }
+
+    /* Tombol tampilkan compact */
+    .panel-toggle-btn {
+        padding: 7px 12px;
+        font-size: 10.5px;
+    }
+
+    /* Brand watermark — lebih kecil di mobile */
+    .brand-watermark {
+        bottom: 16px;
+        left: 12px;
+        padding: 5px 10px 5px 7px;
+        border-radius: 10px;
+    }
+    .bw-logo { height: 24px; width: 24px; }
+    .bw-name { font-size: 11px; }
+    .bw-sub  { font-size: 7px; }
+
+    /* Info panel — full width di bawah */
+    .info-panel {
+        left: 12px;
+        right: 12px;
+        width: auto;
+        bottom: 16px;
+        max-height: 55vh;
+        overflow-y: auto;
+    }
+
+    /* Zoom control */
+    .zoom-ctrl {
+        right: 12px;
+        bottom: 16px;
+    }
+}

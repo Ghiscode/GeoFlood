@@ -281,6 +281,7 @@ function bukaPanel(nama, latlng) {
       alertStatus.textContent = hasil.label;
       alertDesc.textContent   = ALERT_DESC[hasil.level];
 
+      const hist = HIST[nama] || 0;
       factorTable.innerHTML = `
         <div class="ft-row">
           <span class="ft-label">Faktor Fisik</span>
@@ -289,6 +290,10 @@ function bukaPanel(nama, latlng) {
         <div class="ft-row">
           <span class="ft-label">Curah Hujan</span>
           <span class="ft-val">${rain} mm/jam</span>
+        </div>
+        <div class="ft-row">
+          <span class="ft-label">Riwayat Banjir</span>
+          <span class="ft-val">${hist > 0 ? hist + "× kejadian" : "Belum tercatat"}</span>
         </div>
       `;
 

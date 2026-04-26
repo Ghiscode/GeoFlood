@@ -283,11 +283,11 @@ function bukaPanel(nama, latlng) {
 
       factorTable.innerHTML = `
         <div class="ft-row">
-          <span class="ft-label">Zona Kerawanan QGIS</span>
+          <span class="ft-label">Faktor Fisik</span>
           <span class="ft-val ${zonaKls}">${ZONA_LABEL[zone]}</span>
         </div>
         <div class="ft-row">
-          <span class="ft-label">Curah Hujan Realtime</span>
+          <span class="ft-label">Curah Hujan</span>
           <span class="ft-val">${rain} mm/jam</span>
         </div>
       `;

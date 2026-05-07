@@ -1,0 +1,26 @@
+{
+"type": "FeatureCollection",
+"name": "Lembar1",
+"features": [
+{ "type": "Feature", "properties": { }, "geometry": null },
+{ "type": "Feature", "properties": { }, "geometry": null },
+{ "type": "Feature", "properties": { "Field2": "ID", "Field3": "Nama Kolam Retensi", "Field4": "Jumlah Kolam", "Field5": "Kedalaman (M)", "Field6": "Volume Tampungan Total (M3)", "Field7": "Luas Genangan (M2)", "Field8": "Latitude", "Field9": "Longitude" }, "geometry": null },
+{ "type": "Feature", "properties": { "Field2": "1", "Field3": "Taman Lansia", "Field4": "2", "Field5": "4 dan 3", "Field6": "8417.1200000000008", "Field7": "2542.27", "Field8": " -6.903", "Field9": "107.618" }, "geometry": null },
+{ "type": "Feature", "properties": { "Field8": "-6.9089", "Field9": "107.6167" }, "geometry": null },
+{ "type": "Feature", "properties": { "Field2": "2", "Field3": "Sarimas", "Field4": "1", "Field5": "1.5", "Field6": "5370.35", "Field7": "4780", "Field8": " -6.9248", "Field9": "107.6748 " }, "geometry": null },
+{ "type": "Feature", "properties": { "Field2": "3", "Field3": "Sirnaraga", "Field4": "1", "Field5": "3", "Field6": "2563.8000000000002", "Field7": "854.68", "Field8": " -6.8966", "Field9": " 107.5996" }, "geometry": null },
+{ "type": "Feature", "properties": { "Field2": "4", "Field3": "Kandaga Puspa", "Field4": "1", "Field5": "2", "Field6": "6593.28", "Field7": "4120.8", "Field8": "-6.9135", "Field9": "107.6231" }, "geometry": null },
+{ "type": "Feature", "properties": { "Field2": "5", "Field3": "Rancabolang", "Field4": "1", "Field5": "2", "Field6": "3449.7", "Field7": "1724.8", "Field8": "-6.9682919", "Field9": "107.6292301" }, "geometry": null },
+{ "type": "Feature", "properties": { "Field2": "6", "Field3": "Cisurupan", "Field4": "19", "Field5": "±2", "Field6": "1327.12", "Field7": "663.56", "Field8": "-6.9248", "Field9": "107.7196" }, "geometry": null },
+{ "type": "Feature", "properties": { "Field2": "7", "Field3": "Gedebage", "Field4": "1", "Field5": "3.5", "Field6": "5425", "Field7": "1550", "Field8": "-6.939989", "Field9": "107.679532" }, "geometry": null },
+{ "type": "Feature", "properties": { "Field2": "8", "Field3": "Bima", "Field4": "1", "Field5": "4.5", "Field6": "5512.5", "Field7": "1225", "Field8": " -6.91147", "Field9": "107.59604" }, "geometry": null },
+{ "type": "Feature", "properties": { "Field2": "9", "Field3": "Allugoro", "Field4": "1", "Field5": "3.5", "Field6": "3500", "Field7": "1000", "Field8": "-6.91717", "Field9": "107.61864" }, "geometry": null },
+{ "type": "Feature", "properties": { "Field2": "10", "Field3": "Cisanggarung", "Field4": "1", "Field5": "3.5", "Field6": "8792.65", "Field7": "2512.19", "Field8": "-6.8936936", "Field9": "107.6104922" }, "geometry": null },
+{ "type": "Feature", "properties": { "Field2": "11", "Field3": "Bandung Inten", "Field4": "1", "Field5": "4", "Field6": "5400", "Field7": "1350", "Field8": "-6.9626423", "Field9": "107.6133863" }, "geometry": null },
+{ "type": "Feature", "properties": { "Field2": "12", "Field3": "Dian Permai", "Field4": "1", "Field5": "4", "Field6": "4200", "Field7": "1050", "Field8": "-6.9406637", "Field9": "107.57140" }, "geometry": null },
+{ "type": "Feature", "properties": { "Field2": "13", "Field3": "Margahayu", "Field4": "6", "Field5": "2.5", "Field6": "2167.9499999999998", "Field7": "867.18", "Field8": "-6.9482666", "Field9": "107.586756" }, "geometry": null },
+{ "type": "Feature", "properties": { "Field2": "14", "Field3": "Pasar Gedebage", "Field4": "8", "Field5": "3.8", "Field6": "7515.52", "Field7": "1749.6", "Field8": "-6.94165", "Field9": "107.69176" }, "geometry": null },
+{ "type": "Feature", "properties": { "Field2": "15", "Field3": "Dinsos", "Field4": "-", "Field5": "-", "Field6": "-", "Field7": "-", "Field8": " -6.95353", "Field9": "107.67439" }, "geometry": null },
+{ "type": "Feature", "properties": { "Field2": "16", "Field3": "Cibodas", "Field4": "-", "Field5": "-", "Field6": "-", "Field7": "-", "Field8": "-6.9280587", "Field9": "107.5927608" }, "geometry": null }
+]
+}

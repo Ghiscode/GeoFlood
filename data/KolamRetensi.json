@@ -1,0 +1,202 @@
+{
+  "type": "FeatureCollection",
+  "name": "Kolam Retensi",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.618, -6.903]
+      },
+      "properties": {
+        "id": 1,
+        "nama": "Taman Lansia",
+        "volume": 8417.12,
+        "satuan": "m3",
+        "tier": "Tier 1"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6748, -6.9248]
+      },
+      "properties": {
+        "id": 2,
+        "nama": "Sarimas",
+        "volume": 5370.35,
+        "satuan": "m3",
+        "tier": "Tier 1"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.5996, -6.8966]
+      },
+      "properties": {
+        "id": 3,
+        "nama": "Sirnaraga",
+        "volume": 2563.8,
+        "satuan": "m3",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6231, -6.9135]
+      },
+      "properties": {
+        "id": 4,
+        "nama": "Kandaga Puspa",
+        "volume": 6593.28,
+        "satuan": "m3",
+        "tier": "Tier 1"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6292301, -6.9682919]
+      },
+      "properties": {
+        "id": 5,
+        "nama": "Rancabolang",
+        "volume": 3449.7,
+        "satuan": "m3",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.7196, -6.9248]
+      },
+      "properties": {
+        "id": 6,
+        "nama": "Cisurupan",
+        "volume": 1327.12,
+        "satuan": "m3",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.679532, -6.939989]
+      },
+      "properties": {
+        "id": 7,
+        "nama": "Gedebage",
+        "volume": 5425,
+        "satuan": "m3",
+        "tier": "Tier 1"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.59604, -6.91147]
+      },
+      "properties": {
+        "id": 8,
+        "nama": "Bima",
+        "volume": 5512.5,
+        "satuan": "m3",
+        "tier": "Tier 1"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.61864, -6.91717]
+      },
+      "properties": {
+        "id": 9,
+        "nama": "Allugoro",
+        "volume": 3500,
+        "satuan": "m3",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6104922, -6.8936936]
+      },
+      "properties": {
+        "id": 10,
+        "nama": "Cisanggarung",
+        "volume": 8792.65,
+        "satuan": "m3",
+        "tier": "Tier 1"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6133863, -6.9626423]
+      },
+      "properties": {
+        "id": 11,
+        "nama": "Bandung Inten",
+        "volume": 5400,
+        "satuan": "m3",
+        "tier": "Tier 1"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.5714, -6.9406637]
+      },
+      "properties": {
+        "id": 12,
+        "nama": "Dian Permai",
+        "volume": 4200,
+        "satuan": "m3",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.586756, -6.9482666]
+      },
+      "properties": {
+        "id": 13,
+        "nama": "Margahayu",
+        "volume": 2167.95,
+        "satuan": "m3",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.69176, -6.94165]
+      },
+      "properties": {
+        "id": 14,
+        "nama": "Pasar Gedebage",
+        "volume": 7515.52,
+        "satuan": "m3",
+        "tier": "Tier 1"
+      }
+    }
+  ]
+}

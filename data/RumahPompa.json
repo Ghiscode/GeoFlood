@@ -1,0 +1,356 @@
+{
+  "type": "FeatureCollection",
+  "name": "Rumah Pompa",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6975, -6.9242]
+      },
+      "properties": {
+        "id": 1,
+        "nama": "Rumah Pompa Cikiley",
+        "kapasitas": 150,
+        "satuan": "lt/dt",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6912, -6.9185]
+      },
+      "properties": {
+        "id": 2,
+        "nama": "Rumah Pompa Sarimas",
+        "kapasitas": 150,
+        "satuan": "lt/dt",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.674, -6.9535]
+      },
+      "properties": {
+        "id": 3,
+        "nama": "Rumah Pompa Rancabolang 1",
+        "kapasitas": 150,
+        "satuan": "lt/dt",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6798, -6.9587]
+      },
+      "properties": {
+        "id": 4,
+        "nama": "Rumah Pompa Rancabolang 2",
+        "kapasitas": 150,
+        "satuan": "lt/dt",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6712, -6.9387]
+      },
+      "properties": {
+        "id": 5,
+        "nama": "Rumah Pompa Pinus Regency",
+        "kapasitas": 150,
+        "satuan": "lt/dt",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6888, -6.9567]
+      },
+      "properties": {
+        "id": 6,
+        "nama": "Rumah Pompa Summarecon",
+        "kapasitas": 150,
+        "satuan": "lt/dt",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.5901, -6.9034]
+      },
+      "properties": {
+        "id": 7,
+        "nama": "Rumah Pompa Sirnaraga",
+        "kapasitas": 150,
+        "satuan": "lt/dt",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6845, -6.9621]
+      },
+      "properties": {
+        "id": 8,
+        "nama": "Rumah Pompa Cigede Adipura",
+        "kapasitas": 150,
+        "satuan": "lt/dt",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.7025, -6.943]
+      },
+      "properties": {
+        "id": 9,
+        "nama": "Rumah Pompa Panyileukan",
+        "kapasitas": 150,
+        "satuan": "lt/dt",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6931, -6.9601]
+      },
+      "properties": {
+        "id": 10,
+        "nama": "Rumah Pompa Gedebage",
+        "kapasitas": 150,
+        "satuan": "lt/dt",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6789, -6.9456]
+      },
+      "properties": {
+        "id": 11,
+        "nama": "Rumah Pompa Grand Sharon",
+        "kapasitas": 150,
+        "satuan": "lt/dt",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6678, -6.9523]
+      },
+      "properties": {
+        "id": 12,
+        "nama": "Rumah Pompa Merkuri",
+        "kapasitas": 150,
+        "satuan": "lt/dt",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6754, -6.9556]
+      },
+      "properties": {
+        "id": 13,
+        "nama": "Rumah Pompa Rancasawo",
+        "kapasitas": 150,
+        "satuan": "lt/dt",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6654, -6.9123]
+      },
+      "properties": {
+        "id": 14,
+        "nama": "Rumah Pompa Cironggeng",
+        "kapasitas": 150,
+        "satuan": "lt/dt",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6745, -6.9542]
+      },
+      "properties": {
+        "id": 15,
+        "nama": "Rumah Pompa Rancabolang 3",
+        "kapasitas": 150,
+        "satuan": "lt/dt",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.589, -6.9478]
+      },
+      "properties": {
+        "id": 16,
+        "nama": "Rumah Pompa Kopo Citarip",
+        "kapasitas": 150,
+        "satuan": "lt/dt",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.5934, -6.9541]
+      },
+      "properties": {
+        "id": 17,
+        "nama": "Rumah Pompa Cibaduyut",
+        "kapasitas": 150,
+        "satuan": "lt/dt",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.5855, -6.9405]
+      },
+      "properties": {
+        "id": 18,
+        "nama": "Rumah Pompa Pasirkoja",
+        "kapasitas": 150,
+        "satuan": "lt/dt",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.5932, -6.9458]
+      },
+      "properties": {
+        "id": 19,
+        "nama": "Rumah Pompa Leuwipanjang",
+        "kapasitas": 150,
+        "satuan": "lt/dt",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.5615, -6.9172]
+      },
+      "properties": {
+        "id": 20,
+        "nama": "Rumah Pompa Cibereum",
+        "kapasitas": 150,
+        "satuan": "lt/dt",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6543, -6.9512]
+      },
+      "properties": {
+        "id": 21,
+        "nama": "Rumah Pompa Margahayu",
+        "kapasitas": 150,
+        "satuan": "lt/dt",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6945, -6.9612]
+      },
+      "properties": {
+        "id": 22,
+        "nama": "Rumah Pompa Gedebage II",
+        "kapasitas": 150,
+        "satuan": "lt/dt",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6612, -6.9587]
+      },
+      "properties": {
+        "id": 23,
+        "nama": "Pompa Bandung Inten",
+        "kapasitas": 50,
+        "satuan": "lt/dt",
+        "tier": "Tier 3"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.5678, -6.9389]
+      },
+      "properties": {
+        "id": 24,
+        "nama": "Pompa Dian Permai",
+        "kapasitas": 50,
+        "satuan": "lt/dt",
+        "tier": "Tier 3"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6912, -6.9634]
+      },
+      "properties": {
+        "id": 25,
+        "nama": "Pompa De Marrakesh",
+        "kapasitas": 150,
+        "satuan": "lt/dt",
+        "tier": "Tier 2"
+      }
+    }
+  ]
+}

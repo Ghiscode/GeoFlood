@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-
     <header class="app-header">
         <div class="search-wrap">
             <svg class="search-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
@@ -36,7 +35,7 @@
                 <div class="basemap-options">
                     <button class="bmap-btn" data-map="streets">Jalan</button>
                     <button class="bmap-btn" data-map="satellite">Satelit</button>
-                    <button class="bmap-btn active" data-map="light">Minimal</button>
+                    <button class="bmap-btn active" data-map="light">Dasar</button>
                 </div>
             </div>
             <div class="divider"></div>
@@ -58,13 +57,30 @@
                     <div class="toggle-info"><span class="dot" style="background:#ef4444"></span>Titik Kejadian</div>
                     <div class="toggle on" data-layer="historis"><div class="toggle-thumb"></div></div>
                 </label>
+                <label class="toggle-row">
+                    <div class="toggle-info"><span class="dot" style="background:#0ea5e9"></span>Infrastruktur</div>
+                    <div class="toggle on" data-layer="infra"><div class="toggle-thumb"></div></div>
+                </label>
             </div>
             <div class="divider"></div>
             <div class="panel-section">
-                <div class="panel-label">Legenda Zona</div>
-                <div class="legend-item"><span class="leg-swatch" style="background:#fca5a5"></span>Bahaya</div>
-                <div class="legend-item"><span class="leg-swatch" style="background:#fcd34d"></span>Waspada</div>
-                <div class="legend-item"><span class="leg-swatch" style="background:#86efac"></span>Aman</div>
+                <div class="panel-label">Legenda Status</div>
+                <div class="legend-item"><span class="leg-swatch" style="background:#fca5a5"></span>Bahaya <span class="leg-range">&gt;60 poin</span></div>
+                <div class="legend-item"><span class="leg-swatch" style="background:#fcd34d"></span>Waspada <span class="leg-range">31–60 poin</span></div>
+                <div class="legend-item"><span class="leg-swatch" style="background:#86efac"></span>Aman <span class="leg-range">0–30 poin</span></div>
+            </div>
+            <div class="divider"></div>
+            <div class="panel-section">
+                <div class="panel-label">Infrastruktur</div>
+                <div class="legend-item">
+                    <span class="leg-infra" style="background:#0ea5e9">P</span>Rumah Pompa
+                </div>
+                <div class="legend-item">
+                    <span class="leg-infra" style="background:#8b5cf6">K</span>Kolam Retensi
+                </div>
+                <div class="legend-item">
+                    <span class="leg-infra" style="background:#10b981">S</span>Sumur Imbuhan
+                </div>
             </div>
         </div>
     </div>
@@ -77,6 +93,7 @@
         </div>
     </div>
 
+    <!-- ═══ INFO PANEL ═══════════════════════════════════════════ -->
     <div class="info-panel" id="infoPanel">
         <button class="info-close" onclick="closeInfoPanel()">
             <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">

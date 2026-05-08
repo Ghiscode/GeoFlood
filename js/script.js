@@ -1,17 +1,6 @@
 const OWM_KEY        = "c858ad50a4ac7282e4f4a25a290603b3";
 const BANDUNG_CENTER = [-6.9175, 107.6191];
 
-// Frekuensi historis banjir per kelurahan (sumber: QGIS)
-const HIST = {
-  "MEKAR MULYA":4, "BRAGA":2, "MARGASARI":2, "SUKAMISKIN":2, "RANCANUMPANG":2,
-  "CIBADAK":2, "HEGARMANAH":2, "PAJAJARAN":2, "KARANG PAMULANG":2,
-  "ANTAPANI TENGAH":1, "ANTAPANI WETAN":1, "PASIRLAYUNG":1, "BATUNUNGGAL":1,
-  "CIGADUNG":1, "SUKALUYU":1, "ARJUNA":1, "CIPEDES":1, "PASTEUR":1,
-  "SUKAWARNA":1, "DERWATI":1, "KUJANGSARI":1, "PAKEMITAN":1, "PASANGGRAHAN":1,
-  "PASIRJATI":1, "KOPO":1, "CIPAGANTI":1, "PASIRWANGI":1, "CISARANTEN KULON":1,
-  "CIBANGKONG":1, "GEGERKALONG":1, "CIJERAH":1, "JAMIKA":1, "CITARUM":1
-};
-
 const ALERT_DESC = {
   bahaya:  "Risiko banjir sangat tinggi. Segera waspada penuh, hindari area bantaran dan dataran rendah.",
   waspada: "Kondisi rawan banjir. Pantau terus perkembangan cuaca dan siaga mengungsi jika diperlukan.",
@@ -20,12 +9,127 @@ const ALERT_DESC = {
 
 const ZONA_LABEL = { 0:"Aman", 1:"Waspada", 2:"Bahaya" };
 
-// ── Point-in-polygon (ray casting) ───────────────────────────────
+// Frekuensi historis banjir per kelurahan
+const HIST = {
+  "MEKAR MULYA":4,"BRAGA":2,"MARGASARI":2,"SUKAMISKIN":2,"RANCANUMPANG":2,
+  "CIBADAK":2,"HEGARMANAH":2,"PAJAJARAN":2,"KARANG PAMULANG":2,
+  "ANTAPANI TENGAH":1,"ANTAPANI WETAN":1,"PASIRLAYUNG":1,"BATUNUNGGAL":1,
+  "CIGADUNG":1,"SUKALUYU":1,"ARJUNA":1,"CIPEDES":1,"PASTEUR":1,
+  "SUKAWARNA":1,"DERWATI":1,"KUJANGSARI":1,"PAKEMITAN":1,"PASANGGRAHAN":1,
+  "PASIRJATI":1,"KOPO":1,"CIPAGANTI":1,"PASIRWANGI":1,"CISARANTEN KULON":1,
+  "CIBANGKONG":1,"GEGERKALONG":1,"CIJERAH":1,"JAMIKA":1,"CITARUM":1
+};
+
+let dataPompa    = [];
+let dataKolam    = [];
+let dataSumur    = [];
+let zonaFeatures = [];
+let kelurahanIndex = [];
+let highlightLayer = null;
+
+function skorPemicu(zoneLevel, rainMM) {
+  const skorZona = zoneLevel === 2 ? 80 : zoneLevel === 1 ? 40 : 0;
+  const skorHujan = rainMM > 10 ? 20 : rainMM >= 5 ? 10 : 0;
+  return skorZona + skorHujan;
+}
+
+function jarakMeter(lat1, lng1, lat2, lng2) {
+  return L.latLng(lat1, lng1).distanceTo(L.latLng(lat2, lng2));
+}
+
+function mitigasiPompa(lat, lng) {
+  const BASE = { "Tier 1": 30, "Tier 2": 20, "Tier 3": 10 };
+  let totalPoin = 0;
+
+  for (const f of dataPompa) {
+    const [fLng, fLat] = f.geometry.coordinates;
+    const jarak = jarakMeter(lat, lng, fLat, fLng);
+    if (jarak > 500) continue;
+
+    const base = BASE[f.properties.tier] || 10;
+    const multiplier = jarak <= 150 ? 1.0 : jarak <= 350 ? 0.5 : 0.25;
+    totalPoin += Math.round(base * multiplier);
+  }
+
+  return totalPoin;
+}
+
+function mitigasiKolam(lat, lng) {
+  const BASE = { "Tier 1": 20, "Tier 2": 10, "Tier 3": 5 };
+  let totalPoin = 0;
+
+  for (const f of dataKolam) {
+    const [fLng, fLat] = f.geometry.coordinates;
+    const jarak = jarakMeter(lat, lng, fLat, fLng);
+    if (jarak > 1000) continue;
+
+    const tier = f.properties.tier;
+    const base = BASE[tier] || 5;
+
+    let multiplier;
+    if (jarak <= 300)       multiplier = 1.0;
+    else if (jarak <= 700)  multiplier = 0.5;
+    else {
+      if (tier === "Tier 3") continue;
+      multiplier = 0.25;
+    }
+
+    totalPoin += Math.round(base * multiplier);
+  }
+
+  return totalPoin;
+}
+
+function mitigasiSumur(lat, lng) {
+  const BASE = { "Tier 1": 10, "Tier 2": 5 };
+  let totalPoin = 0;
+
+  for (const f of dataSumur) {
+    const [fLng, fLat] = f.geometry.coordinates;
+    const jarak = jarakMeter(lat, lng, fLat, fLng);
+    if (jarak > 200) continue;
+
+    const base = BASE[f.properties.tier] || 5;
+    const multiplier = jarak <= 100 ? 1.0 : 0.5;
+    totalPoin += Math.round(base * multiplier);
+  }
+
+  return totalPoin;
+}
+
+function hitungRisiko(zoneLevel, rainMM, lat, lng) {
+  const pemicu   = skorPemicu(zoneLevel, rainMM);
+  const mitigasi = mitigasiPompa(lat, lng) +
+                   mitigasiKolam(lat, lng) +
+                   mitigasiSumur(lat, lng);
+
+  const skorAkhir = Math.max(0, pemicu - mitigasi);
+
+  let level, label;
+  if (skorAkhir > 60)      { level = "bahaya";  label = "BAHAYA";  }
+  else if (skorAkhir > 30) { level = "waspada"; label = "WASPADA"; }
+  else                     { level = "aman";    label = "AMAN";    }
+
+  return { level, label, skorAkhir, pemicu, mitigasi };
+}
+
+function kondisiCuaca(id, rain) {
+  if (id >= 200 && id < 300) return "Hujan Petir";
+  if (id >= 300 && id < 600) {
+    if (rain > 10) return "Hujan Lebat";
+    if (rain >= 5) return "Hujan Sedang";
+    return "Hujan Ringan";
+  }
+  if (id >= 600 && id < 800) return "Berawan";
+  if (id === 800) return "Cerah";
+  if (id === 801) return "Cerah Berawan";
+  return "Mendung";
+}
+
 function pointInRing(lng, lat, ring) {
   let inside = false;
   for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
-    const [xi, yi] = ring[i];
-    const [xj, yj] = ring[j];
+    const [xi, yi] = ring[i], [xj, yj] = ring[j];
     if (((yi > lat) !== (yj > lat)) &&
         (lng < (xj - xi) * (lat - yi) / (yj - yi) + xi)) {
       inside = !inside;
@@ -37,15 +141,12 @@ function pointInRing(lng, lat, ring) {
 function pointInMultiPolygon(lng, lat, coords) {
   for (const polygon of coords) {
     if (pointInRing(lng, lat, polygon[0])) {
-      const inHole = polygon.slice(1).some(hole => pointInRing(lng, lat, hole));
+      const inHole = polygon.slice(1).some(h => pointInRing(lng, lat, h));
       if (!inHole) return true;
     }
   }
   return false;
 }
-
-// ── Zona QGIS lookup ─────────────────────────────────────────────
-let zonaFeatures = [];
 
 function zonaAt(latlng) {
   if (!zonaFeatures.length) return 1;
@@ -57,36 +158,6 @@ function zonaAt(latlng) {
   return 0;
 }
 
-// ── Kalkulasi peringatan dini ─────────────────────────────────────
-// Sistem skoring sesuai metodologi penelitian:
-//   Skor Zona QGIS  : Bahaya=3, Waspada=2, Aman=1  (data statis)
-//   Skor Curah Hujan: >10mm=3, 5-10mm=2, <5mm=1    (data dinamis)
-//   Total skor      : 7-9 = Bahaya, 5-6 = Waspada, 2-4 = Aman
-function hitungPeringatan(rainMM, zoneLevel) {
-  const skorZona  = zoneLevel === 2 ? 3 : zoneLevel === 1 ? 2 : 1;
-  const skorHujan = rainMM > 10 ? 3 : rainMM >= 5 ? 2 : 1;
-  const total     = skorZona + skorHujan;
-
-  if (total >= 7) return { level:"bahaya",  label:"BAHAYA",  total };
-  if (total >= 5) return { level:"waspada", label:"WASPADA", total };
-  return              { level:"aman",    label:"AMAN",    total };
-}
-
-// ── Label cuaca berdasarkan curah hujan realtime ─────────────────
-// 0mm = Cerah | 1-5mm = Hujan Ringan | 5-10mm = Hujan Sedang | >10mm = Hujan Lebat
-function kondisiCuaca(id, rain) {
-  if (rain === 0) {
-    if (id >= 200 && id < 300) return "Hujan Petir";
-    if (id === 800) return "Cerah";
-    if (id === 801) return "Cerah Berawan";
-    return "Mendung";
-  }
-  if (rain > 10) return "Hujan Lebat";
-  if (rain >= 5)  return "Hujan Sedang";
-  return "Hujan Ringan";
-}
-
-// ── Panel toggle ──────────────────────────────────────────────────
 let panelOpen = false;
 
 function toggleLayerPanel() {
@@ -99,7 +170,6 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("panelBody").classList.add("hidden");
 });
 
-// ── Map init ──────────────────────────────────────────────────────
 const map = L.map("map", { zoomControl:false, attributionControl:false })
   .setView(BANDUNG_CENTER, 13);
 
@@ -108,10 +178,10 @@ const basemaps = {
   satellite: L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}", { maxZoom:19 }),
   light:     L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", { maxZoom:19 })
 };
-basemaps.light.addTo(map);
-let activeBasemap = "light";
+basemaps.satellite.addTo(map);
+let activeBasemap = "satellite";
 
-["paneZona","paneSungai","paneBatas","paneTitik"].forEach((name, i) => {
+["paneZona","paneSungai","paneBatas","paneInfra","paneTitik"].forEach((name, i) => {
   map.createPane(name).style.zIndex = 400 + i * 50;
 });
 
@@ -120,29 +190,25 @@ const layers = {
   sungai:   L.layerGroup().addTo(map),
   batas:    L.layerGroup().addTo(map),
   historis: L.layerGroup().addTo(map),
+  infra:    L.layerGroup().addTo(map),
 };
 
-let kelurahanIndex = [];
-let highlightLayer = null;
-
-// ── Load: Zona Kerawanan ──────────────────────────────────────────
+// Zona Kerawanan
 fetch("data/Zona-Banjir-Bandung.geojson")
   .then(r => r.json())
   .then(data => {
     zonaFeatures = data.features;
     L.geoJSON(data, {
-      pane: "paneZona",
-      interactive: false,
+      pane: "paneZona", interactive: false,
       style: f => ({
         fillColor: f.properties.zone === 2 ? "#fca5a5"
                  : f.properties.zone === 1 ? "#fcd34d" : "#86efac",
-        weight: 0,
-        fillOpacity: 0.45,
+        weight: 0, fillOpacity: 0.45,
       })
     }).addTo(layers.zona);
   });
 
-// ── Load: Sungai ──────────────────────────────────────────────────
+// Sungai
 fetch("data/Sungai-Bandung.geojson")
   .then(r => r.json())
   .then(data => {
@@ -150,13 +216,12 @@ fetch("data/Sungai-Bandung.geojson")
       pane: "paneSungai",
       style: f => {
         const r = (f.properties.REMARK || "").toLowerCase();
-        const isMain = r.includes("utama") || r.includes("induk");
-        return { color:"#3b82f6", weight: isMain ? 2.5 : 1.5, opacity:0.7 };
+        return { color:"#3b82f6", weight: r.includes("utama")||r.includes("induk") ? 2.5 : 1.5, opacity:0.7 };
       }
     }).addTo(layers.sungai);
   });
 
-// ── Load: Historis Banjir ─────────────────────────────────────────
+// Historis Banjir
 fetch("data/Historis-Banjir.geojson")
   .then(r => r.json())
   .then(data => {
@@ -166,30 +231,29 @@ fetch("data/Historis-Banjir.geojson")
         const jiwa = f.properties.Jiwa_Menderita || 0;
         const rad  = Math.min(4 + Math.sqrt(jiwa) * 1.4, 13);
         L.circleMarker(latlng, {
-          pane:"paneTitik", radius:rad * 2.2,
+          pane:"paneTitik", radius:rad*2.2,
           fillColor:"#ef4444", fillOpacity:.1,
           color:"#ef4444", weight:.5, opacity:.25, interactive:false,
         }).addTo(layers.historis);
         return L.circleMarker(latlng, {
-          radius:rad, fillColor:"#ef4444",
-          color:"#fff", weight:1.8, fillOpacity:.92,
+          radius:rad, fillColor:"#ef4444", color:"#fff", weight:1.8, fillOpacity:.92,
         });
       },
       onEachFeature: (f, l) => {
         const p = f.properties;
         l.bindTooltip(`
-          <div class="tt-name">📍 Kel. ${p.Kelurahan || "—"}</div>
+          <div class="tt-name">📍 Kel. ${p.Kelurahan||"—"}</div>
           <div class="tt-stats">
-            Kec. ${p.Kecamatan || "—"} &nbsp;·&nbsp; <strong>${p.Tgl_Kejadian || "—"}</strong><br>
-            ${p.Jiwa_Menderita || 0} jiwa &nbsp;·&nbsp; ${p.Rumah_Terendam || 0} rumah terendam
+            Kec. ${p.Kecamatan||"—"} &nbsp;·&nbsp; <strong>${p.Tgl_Kejadian||"—"}</strong><br>
+            ${p.Jiwa_Menderita||0} jiwa &nbsp;·&nbsp; ${p.Rumah_Terendam||0} rumah terendam
           </div>
         `, { className:"geo-tt", sticky:true, offset:[10,0] });
-        l.on("click", e => bukaPanel((p.Kelurahan || "—").toUpperCase(), e.latlng));
+        l.on("click", e => bukaPanel((p.Kelurahan||"—").toUpperCase(), e.latlng));
       }
     }).addTo(layers.historis);
   });
 
-// ── Load: Batas Wilayah ───────────────────────────────────────────
+// Batas Wilayah
 fetch("data/Batas-Wilayah.geojson")
   .then(r => r.json())
   .then(data => {
@@ -213,15 +277,15 @@ fetch("data/Batas-Wilayah.geojson")
           fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${e.latlng.lat}&lon=${e.latlng.lng}&appid=${OWM_KEY}&units=metric&lang=id`)
             .then(r => r.json())
             .then(w => {
-              const rain   = w.rain ? (w.rain["1h"] || 0) : 0;
+              const rain   = w.rain ? (w.rain["1h"] || w.rain["3h"] || 0) : 0;
               const entry  = kelurahanIndex.find(k => k.nama === nama);
               const zonePt = entry?.centroid || e.latlng;
               const zone   = zonaAt(zonePt);
-              const hasil  = hitungPeringatan(rain, zone);
+              const hasil  = hitungRisiko(zone, rain, e.latlng.lat, e.latlng.lng);
               const warna  = { bahaya:"#dc2626", waspada:"#d97706", aman:"#16a34a" }[hasil.level];
               this.setTooltipContent(`
                 <div class="tt-name">Kel. ${nama}</div>
-                <div class="tt-alert" style="color:${warna}">● ${hasil.label}</div>
+                <div class="tt-alert" style="color:${warna}">● ${hasil.label} (${hasil.skorAkhir} poin)</div>
                 <div class="tt-stats">
                   ${kondisiCuaca(w.weather[0].id, rain)} &nbsp;·&nbsp; ${w.main.temp.toFixed(1)}°C<br>
                   💧 ${rain} mm/jam
@@ -233,13 +297,83 @@ fetch("data/Batas-Wilayah.geojson")
         l.on("mouseout", function() {
           this.setStyle({ weight:.8, color:"#94a3b8", dashArray:"3,3" });
         });
-
         l.on("click", e => bukaPanel(nama, e.latlng));
       }
     }).addTo(layers.batas);
   });
 
-// ── Info panel ────────────────────────────────────────────────────
+// ── Infrastruktur: Ikon kustom ────────────────────────────────────
+function buatIkon(warna, simbol) {
+  return L.divIcon({
+    className: "",
+    html: `<div style="
+      width:26px;height:26px;border-radius:50%;
+      background:${warna};color:white;
+      display:flex;align-items:center;justify-content:center;
+      font-size:13px;font-weight:700;
+      box-shadow:0 2px 6px rgba(0,0,0,.3);
+      border:2px solid white;">
+      ${simbol}
+    </div>`,
+    iconSize: [26, 26],
+    iconAnchor: [13, 13],
+  });
+}
+
+// Rumah Pompa
+fetch("data/RumahPompa.json")
+  .then(r => r.json())
+  .then(data => {
+    dataPompa = data.features;
+    L.geoJSON(data, {
+      pane: "paneInfra",
+      pointToLayer: (f, latlng) => L.marker(latlng, { icon: buatIkon("#0ea5e9", "P") }),
+      onEachFeature: (f, l) => {
+        const p = f.properties;
+        l.bindTooltip(`
+          <div class="tt-name">💧 ${p.nama}</div>
+          <div class="tt-stats">${p.tier} &nbsp;·&nbsp; ${p.kapasitas} lt/dt</div>
+        `, { className:"geo-tt", sticky:true });
+      }
+    }).addTo(layers.infra);
+  });
+
+// Kolam Retensi
+fetch("data/KolamRetensi.json")
+  .then(r => r.json())
+  .then(data => {
+    dataKolam = data.features;
+    L.geoJSON(data, {
+      pane: "paneInfra",
+      pointToLayer: (f, latlng) => L.marker(latlng, { icon: buatIkon("#8b5cf6", "K") }),
+      onEachFeature: (f, l) => {
+        const p = f.properties;
+        l.bindTooltip(`
+          <div class="tt-name">🏊 ${p.nama}</div>
+          <div class="tt-stats">${p.tier} &nbsp;·&nbsp; ${p.volume.toLocaleString()} m³</div>
+        `, { className:"geo-tt", sticky:true });
+      }
+    }).addTo(layers.infra);
+  });
+
+// Sumur Imbuhan
+fetch("data/SumurImbuhan.json")
+  .then(r => r.json())
+  .then(data => {
+    dataSumur = data.features;
+    L.geoJSON(data, {
+      pane: "paneInfra",
+      pointToLayer: (f, latlng) => L.marker(latlng, { icon: buatIkon("#10b981", "S") }),
+      onEachFeature: (f, l) => {
+        const p = f.properties;
+        l.bindTooltip(`
+          <div class="tt-name">🔵 ${p.nama}</div>
+          <div class="tt-stats">${p.tier} &nbsp;·&nbsp; ${p.tipe || "—"} &nbsp;·&nbsp; ${p.kelurahan}</div>
+        `, { className:"geo-tt", sticky:true });
+      }
+    }).addTo(layers.infra);
+  });
+
 function bukaPanel(nama, latlng) {
   document.getElementById("infoName").textContent   = nama;
   document.getElementById("infoCoords").textContent =
@@ -268,20 +402,20 @@ function bukaPanel(nama, latlng) {
   fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latlng.lat}&lon=${latlng.lng}&appid=${OWM_KEY}&units=metric&lang=id`)
     .then(r => r.json())
     .then(w => {
-      const rain    = w.rain ? (w.rain["1h"] || 0) : 0;
+      const rain    = w.rain ? (w.rain["1h"] || w.rain["3h"] || 0) : 0;
       const entry   = kelurahanIndex.find(k => k.nama === nama);
       const zonePt  = entry?.centroid || latlng;
       const zone    = zonaAt(zonePt);
-      const hasil   = hitungPeringatan(rain, zone, nama);
+      const hist    = HIST[nama] || 0;
+      const hasil   = hitungRisiko(zone, rain, latlng.lat, latlng.lng);
       const zonaKls = { 0:"aman", 1:"waspada", 2:"bahaya" }[zone];
 
       alertBlock.className    = `alert-block ${hasil.level}`;
       alertDot.className      = `alert-dot ${hasil.level}`;
       alertStatus.className   = `alert-status ${hasil.level}`;
-      alertStatus.textContent = hasil.label;
+      alertStatus.textContent = `${hasil.label}`;
       alertDesc.textContent   = ALERT_DESC[hasil.level];
 
-      const hist = HIST[nama] || 0;
       factorTable.innerHTML = `
         <div class="ft-row">
           <span class="ft-label">Faktor Fisik</span>
@@ -323,7 +457,6 @@ function closeInfoPanel() {
   clearHighlight();
 }
 
-// ── Layer toggles ─────────────────────────────────────────────────
 document.querySelectorAll(".toggle").forEach(t => {
   t.addEventListener("click", () => {
     const isOn = t.classList.toggle("on");
@@ -331,7 +464,6 @@ document.querySelectorAll(".toggle").forEach(t => {
   });
 });
 
-// ── Basemap switcher ──────────────────────────────────────────────
 document.querySelectorAll(".bmap-btn").forEach(btn => {
   btn.addEventListener("click", () => {
     const key = btn.dataset.map;

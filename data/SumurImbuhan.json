@@ -1,0 +1,1056 @@
+{
+  "type": "FeatureCollection",
+  "name": "Sumur Imbuhan",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.7135378, -6.9400446]
+      },
+      "properties": {
+        "id": 1,
+        "nama": "Bumi Panyileukan",
+        "kelurahan": "Cipadung Kidul",
+        "tipe": "Dangkal",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6804312, -6.9649073]
+      },
+      "properties": {
+        "id": 2,
+        "nama": "Kluster Palem, Gedebage Adipura",
+        "kelurahan": "Rancabolang",
+        "tipe": "Dangkal",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6804312, -6.9649073]
+      },
+      "properties": {
+        "id": 3,
+        "nama": "Kluster Pinus, Gedebage Adipura",
+        "kelurahan": "Rancabolang",
+        "tipe": "Dangkal",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6798589, -6.9675161]
+      },
+      "properties": {
+        "id": 4,
+        "nama": "Kluster Tulip, Gedebage Adipura",
+        "kelurahan": "Rancabolang",
+        "tipe": "Dangkal",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6845212, -6.9660538]
+      },
+      "properties": {
+        "id": 5,
+        "nama": "Masjid Al Hidayah, Rancabolang, Gedebage",
+        "kelurahan": "Rancabolang",
+        "tipe": "Dangkal",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6791582, -6.9354206]
+      },
+      "properties": {
+        "id": 6,
+        "nama": "Belakang Pasar Induk Gedebage",
+        "kelurahan": "Mekar Mulya",
+        "tipe": "Dangkal",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6869186, -6.945699]
+      },
+      "properties": {
+        "id": 7,
+        "nama": "SD Cimencrang RW 03 Kec. Gedebage",
+        "kelurahan": "Cimenerang",
+        "tipe": "Dangkal",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6649847, -6.9648381]
+      },
+      "properties": {
+        "id": 8,
+        "nama": "SD 069 Cipamokolan, Derwati, Kec. Rancasari",
+        "kelurahan": "Derwati",
+        "tipe": "Dangkal",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6743279, -6.9280069]
+      },
+      "properties": {
+        "id": 9,
+        "nama": "Rusunawa Cingised, Kec. Arcamanik",
+        "kelurahan": "Cisaranten Kulon",
+        "tipe": "Dangkal",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6643256, -6.925433]
+      },
+      "properties": {
+        "id": 10,
+        "nama": "Cisaranten Kulon IX, Arcamanik",
+        "kelurahan": "Cisaranten Kulon",
+        "tipe": "Dangkal",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.648982, -6.9360249]
+      },
+      "properties": {
+        "id": 11,
+        "nama": "Sanggar Hurip, Jatisari, Buahbatu",
+        "kelurahan": "Jatisari",
+        "tipe": "Dangkal",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6643959, -6.9627871]
+      },
+      "properties": {
+        "id": 12,
+        "nama": "Baturaden, Mekarjaya, Rancasari",
+        "kelurahan": "Mekarjaya",
+        "tipe": "Dangkal",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.655266, -6.9576921]
+      },
+      "properties": {
+        "id": 13,
+        "nama": "Megabrata, Buahbatu",
+        "kelurahan": "Margasari",
+        "tipe": "Dangkal",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6481444, -6.9660595]
+      },
+      "properties": {
+        "id": 14,
+        "nama": "SMP 48 Kota Bandung",
+        "kelurahan": "Mekarjaya",
+        "tipe": "Dangkal",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.5649086, -6.9448927]
+      },
+      "properties": {
+        "id": 15,
+        "nama": "Komplek Margahayu Raya RW 08, Jl. Merkuri Selatan XI",
+        "kelurahan": "Manjahlega",
+        "tipe": "Dangkal",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6402024, -6.9492461]
+      },
+      "properties": {
+        "id": 16,
+        "nama": "Jl. Jupiter Utama, Sekejati, Buahbatu",
+        "kelurahan": "Sekajati",
+        "tipe": "Dangkal",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6939216, -6.948737]
+      },
+      "properties": {
+        "id": 17,
+        "nama": "Komplek Panghegar Permai III, Panyileukan",
+        "kelurahan": "Mekar Mulya",
+        "tipe": "Dangkal",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.5866324, -6.8945975]
+      },
+      "properties": {
+        "id": 18,
+        "nama": "Kompleks Sukadamai, Jl. Sukadamai II",
+        "kelurahan": "Sukagalih",
+        "tipe": "Dangkal",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.5826488, -6.9548948]
+      },
+      "properties": {
+        "id": 19,
+        "nama": "Samping Komplek Perbatasan RT 05/RW 10 Margasari, Buahbatu",
+        "kelurahan": "Margasari",
+        "tipe": "Dangkal",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.5890255, -6.9618618]
+      },
+      "properties": {
+        "id": 20,
+        "nama": "Depan Terminal Cibaduyut",
+        "kelurahan": "Cibaduyut Wetan",
+        "tipe": "Dangkal",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6434898, -6.9595315]
+      },
+      "properties": {
+        "id": 21,
+        "nama": "Taman Pluto",
+        "kelurahan": "Margasari",
+        "tipe": "Dangkal",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6601346, -6.9423844]
+      },
+      "properties": {
+        "id": 22,
+        "nama": "Komplek Riung Mas",
+        "kelurahan": "Cipamokolan",
+        "tipe": "Dangkal",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6570111, -6.9620926]
+      },
+      "properties": {
+        "id": 23,
+        "nama": "Komplek Bandung Indah Raya",
+        "kelurahan": "Mekarjaya",
+        "tipe": "Dangkal",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6584361, -6.9677331]
+      },
+      "properties": {
+        "id": 24,
+        "nama": "Komplek Marakesh",
+        "kelurahan": "Derwati",
+        "tipe": "Dangkal",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.5855698, -6.9365065]
+      },
+      "properties": {
+        "id": 25,
+        "nama": "Komplek Taman Raflesia",
+        "kelurahan": "Sukapura",
+        "tipe": "Dangkal",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.626065, -6.9676075]
+      },
+      "properties": {
+        "id": 26,
+        "nama": "Dishub Kota Bandung",
+        "kelurahan": "Rancabolang",
+        "tipe": "Dangkal",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6620161, -6.9535475]
+      },
+      "properties": {
+        "id": 27,
+        "nama": "Saturnus Selatan",
+        "kelurahan": "Margasari",
+        "tipe": "Dangkal",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6071336, -6.930524]
+      },
+      "properties": {
+        "id": 28,
+        "nama": "Kangkung Kaler",
+        "kelurahan": "Lingkar Selatan",
+        "tipe": "Dangkal",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6686526, -6.946073]
+      },
+      "properties": {
+        "id": 29,
+        "nama": "Komplek Santosa Asih Raya",
+        "kelurahan": "Cipamokolan",
+        "tipe": "Dangkal",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6099987, -6.9179786]
+      },
+      "properties": {
+        "id": 30,
+        "nama": "Kacapiring",
+        "kelurahan": "Kacapiring",
+        "tipe": "Dangkal",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.637245, -6.9623161]
+      },
+      "properties": {
+        "id": 31,
+        "nama": "Jalan Margawangi",
+        "kelurahan": "Cijaura",
+        "tipe": "Dangkal",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6334013, -6.96111]
+      },
+      "properties": {
+        "id": 32,
+        "nama": "Jalan Pandanwangi",
+        "kelurahan": "Cijaura",
+        "tipe": "Dangkal",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.590848, -6.9547658]
+      },
+      "properties": {
+        "id": 33,
+        "nama": "Jalan Cibaduyut",
+        "kelurahan": "Cibaduyut",
+        "tipe": "Dangkal",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6646433, -6.9413922]
+      },
+      "properties": {
+        "id": 34,
+        "nama": "Jalan Rancasari",
+        "kelurahan": "Manjahlega",
+        "tipe": "Dangkal",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6382437, -6.9261819]
+      },
+      "properties": {
+        "id": 35,
+        "nama": "SMP 37",
+        "kelurahan": "Babakan Sari",
+        "tipe": "Dangkal",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6434898, -6.9595315]
+      },
+      "properties": {
+        "id": 36,
+        "nama": "Jl. Sawo Endah RT 03 Kelurahan Margasari",
+        "kelurahan": "Margasari",
+        "tipe": "Dangkal",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6458347, -6.9650191]
+      },
+      "properties": {
+        "id": 37,
+        "nama": "Komplek Banyu Biru",
+        "kelurahan": "Mekarjaya",
+        "tipe": "Dangkal",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6370227, -6.9385879]
+      },
+      "properties": {
+        "id": 38,
+        "nama": "Komplek Palem RW 07",
+        "kelurahan": "Jatisari",
+        "tipe": "Dangkal",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6804312, -6.9649073]
+      },
+      "properties": {
+        "id": 39,
+        "nama": "Bumi Pitaloka RT 03 RW 03 Kel. Rancanumpang Kec. Gedebage",
+        "kelurahan": "Rancanumpang",
+        "tipe": "Dangkal",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6494485, -6.9418463]
+      },
+      "properties": {
+        "id": 40,
+        "nama": "Area Bundaran Jl. Venus Raya Metro RW 01 Kel. Manjahlega Kec. Rancasari",
+        "kelurahan": "Manjahlega",
+        "tipe": "Dangkal",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6439907, -6.9569719]
+      },
+      "properties": {
+        "id": 41,
+        "nama": "Jl. Pluto Komplek Margahayu Raya Kel. Margasari",
+        "kelurahan": "Margasari",
+        "tipe": "Dangkal",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6484542, -6.9352654]
+      },
+      "properties": {
+        "id": 42,
+        "nama": "Jl. Sanggar Kencana 10 RT 06 RW 02",
+        "kelurahan": "Jatisari",
+        "tipe": "Dangkal",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6548246, -6.96152]
+      },
+      "properties": {
+        "id": 43,
+        "nama": "Kantor Lurah Mekarjaya",
+        "kelurahan": "Mekarjaya",
+        "tipe": "Dangkal",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6570111, -6.9620926]
+      },
+      "properties": {
+        "id": 44,
+        "nama": "Komplek Bandung Indah Raya",
+        "kelurahan": "Mekarjaya",
+        "tipe": "Dangkal",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6476586, -6.9502312]
+      },
+      "properties": {
+        "id": 45,
+        "nama": "Komplek Saturnus Utara XII depan Masjid Al Muslimun",
+        "kelurahan": "Manjahlega",
+        "tipe": "Dangkal",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.666543, -6.9422237]
+      },
+      "properties": {
+        "id": 46,
+        "nama": "Komplek Ariagraha Cipamokolan RW 10",
+        "kelurahan": "Cipamokolan",
+        "tipe": "Dangkal",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6570289, -6.9533788]
+      },
+      "properties": {
+        "id": 47,
+        "nama": "Jl. Uranus Selatan",
+        "kelurahan": "Sekejati",
+        "tipe": "Dangkal",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.5698863, -6.9389976]
+      },
+      "properties": {
+        "id": 48,
+        "nama": "Komplek Dian Permai",
+        "kelurahan": "Babakan",
+        "tipe": "Dangkal",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6849836, -6.9687442]
+      },
+      "properties": {
+        "id": 49,
+        "nama": "Kolam Retensi Rancabolang 3",
+        "kelurahan": "Rancabolang",
+        "tipe": "Dangkal",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6798589, -6.9675161]
+      },
+      "properties": {
+        "id": 50,
+        "nama": "Kantor Dishub",
+        "kelurahan": "Rancabolang",
+        "tipe": "Dangkal",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6772587, -6.9687441]
+      },
+      "properties": {
+        "id": 51,
+        "nama": "Kolam Retensi Rancabolang 3 Lanjutan",
+        "kelurahan": "Rancabolang",
+        "tipe": "Dangkal",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6040251, -6.9300772]
+      },
+      "properties": {
+        "id": 52,
+        "nama": "SDN 008 Moh Toha",
+        "kelurahan": "Pungkur",
+        "tipe": "Dangkal",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6408176, -6.9355002]
+      },
+      "properties": {
+        "id": 53,
+        "nama": "Kawaluyaan Regency / SMK Setia Bhakti",
+        "kelurahan": "Jatisari",
+        "tipe": "Dangkal",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6539015, -6.9569004]
+      },
+      "properties": {
+        "id": 54,
+        "nama": "SMPN 42 Bandung RW 21",
+        "kelurahan": "Margasari",
+        "tipe": "Dangkal",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6635442, -6.9573874]
+      },
+      "properties": {
+        "id": 55,
+        "nama": "Jl. Kemakmuran IV Riung Bandung",
+        "kelurahan": "Derwati",
+        "tipe": "Dangkal",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6458347, -6.9650191]
+      },
+      "properties": {
+        "id": 56,
+        "nama": "Baturaden 9 RW 07",
+        "kelurahan": "Mekarjaya",
+        "tipe": "Dangkal",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6625201, -6.9474605]
+      },
+      "properties": {
+        "id": 57,
+        "nama": "Riung Bandung Permai Masjid Muhajirin Jl. Saluyu A XV",
+        "kelurahan": "Cisaranten Kidul",
+        "tipe": "Dangkal",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6735998, -6.9400993]
+      },
+      "properties": {
+        "id": 58,
+        "nama": "Kantor Kelurahan Babakan Penghulu",
+        "kelurahan": "Babakan Penghulu",
+        "tipe": "Dangkal",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6838825, -6.9616435]
+      },
+      "properties": {
+        "id": 59,
+        "nama": "Kolret Komplek Bandung Inten",
+        "kelurahan": "Derwati",
+        "tipe": "Dangkal",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6201916, -6.9600148]
+      },
+      "properties": {
+        "id": 60,
+        "nama": "Jl. Cijaura Hilir RT 02 RW 11",
+        "kelurahan": "Cijaura",
+        "tipe": "Dangkal",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.624206, -6.953087]
+      },
+      "properties": {
+        "id": 61,
+        "nama": "Dekat SDN Parakan Waas",
+        "kelurahan": "Batununggal",
+        "tipe": "Dangkal",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.65314, -6.9563552]
+      },
+      "properties": {
+        "id": 62,
+        "nama": "Gg. Margaasih 1",
+        "kelurahan": "Cijaura",
+        "tipe": "Dangkal",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6423113, -6.9598634]
+      },
+      "properties": {
+        "id": 63,
+        "nama": "Jl. Buana Mekar",
+        "kelurahan": "Kujang Sari",
+        "tipe": "Dangkal",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6408176, -6.9355002]
+      },
+      "properties": {
+        "id": 64,
+        "nama": "Komplek Raflesia",
+        "kelurahan": "Sukapura",
+        "tipe": "Dangkal",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6604357, -6.9651194]
+      },
+      "properties": {
+        "id": 65,
+        "nama": "Jl. Banyu Biru Raya RW 10",
+        "kelurahan": "Mekarjaya",
+        "tipe": "Dangkal",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6562789, -6.9482666]
+      },
+      "properties": {
+        "id": 66,
+        "nama": "Kolam Retensi Margahayu",
+        "kelurahan": "Sekejati",
+        "tipe": "Dangkal",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.7015664, -6.9677552]
+      },
+      "properties": {
+        "id": 67,
+        "nama": "Kolam Retensi Rancabolang 2",
+        "kelurahan": "Rancabolang",
+        "tipe": "Dangkal",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6048212, -6.9448945]
+      },
+      "properties": {
+        "id": 68,
+        "nama": "Perumahan Kurdi",
+        "kelurahan": "Cigereleng",
+        "tipe": "Dangkal",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.5472394, -6.8982793]
+      },
+      "properties": {
+        "id": 69,
+        "nama": "Cimindi",
+        "kelurahan": "Campaka",
+        "tipe": "Dangkal",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.5866324, -6.8945975]
+      },
+      "properties": {
+        "id": 70,
+        "nama": "Komplek Sukadamai",
+        "kelurahan": "Sukagalih",
+        "tipe": "Dangkal",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.699816, -6.966746]
+      },
+      "properties": {
+        "id": 71,
+        "nama": "Palem 7 Adipura",
+        "kelurahan": "Rancabolang",
+        "tipe": "Dangkal",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6056746, -6.935256]
+      },
+      "properties": {
+        "id": 72,
+        "nama": "Jl. Mutiara 1",
+        "kelurahan": "Turangga",
+        "tipe": "Dangkal",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6692221, -6.966068]
+      },
+      "properties": {
+        "id": 73,
+        "nama": "Rancabolang Masjid Al Hidayah",
+        "kelurahan": "Rancabolang",
+        "tipe": "Dangkal",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.64549, -6.9543078]
+      },
+      "properties": {
+        "id": 74,
+        "nama": "Margacinta Park (Jl. Bunga Bakung)",
+        "kelurahan": "Cijaura",
+        "tipe": "Dangkal",
+        "tier": "Tier 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6687002, -6.9646661]
+      },
+      "properties": {
+        "id": 75,
+        "nama": "Jl. Empang Pojok",
+        "kelurahan": "Mekarjaya",
+        "tipe": "Dangkal",
+        "tier": "Tier 2"
+      }
+    }
+  ]
+}

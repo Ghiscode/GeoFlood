@@ -189,8 +189,8 @@ const layers = {
   zona:     L.layerGroup().addTo(map),
   sungai:   L.layerGroup().addTo(map),
   batas:    L.layerGroup().addTo(map),
-  historis: L.layerGroup().addTo(map),
-  infra:    L.layerGroup().addTo(map),
+  historis: L.layerGroup(),
+  infra:    L.layerGroup(),
 };
 
 // Zona Kerawanan
@@ -285,7 +285,7 @@ fetch("data/Batas-Wilayah.geojson")
               const warna  = { bahaya:"#dc2626", waspada:"#d97706", aman:"#16a34a" }[hasil.level];
               this.setTooltipContent(`
                 <div class="tt-name">Kel. ${nama}</div>
-                <div class="tt-alert" style="color:${warna}">● ${hasil.label} (${hasil.skorAkhir} poin)</div>
+                <div class="tt-alert" style="color:${warna}">● ${hasil.label} poin)</div>
                 <div class="tt-stats">
                   ${kondisiCuaca(w.weather[0].id, rain)} &nbsp;·&nbsp; ${w.main.temp.toFixed(1)}°C<br>
                   💧 ${rain} mm/jam
@@ -418,7 +418,7 @@ function bukaPanel(nama, latlng) {
 
       factorTable.innerHTML = `
         <div class="ft-row">
-          <span class="ft-label">Faktor Fisik</span>
+          <span class="ft-label">Faktor Fisik</span>  
           <span class="ft-val ${zonaKls}">${ZONA_LABEL[zone]}</span>
         </div>
         <div class="ft-row">

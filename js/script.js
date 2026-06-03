@@ -1,4 +1,4 @@
-const OWM_KEY        = "c858ad50a4ac7282e4f4a25a290603b3";
+const OWM_KEY = "9183a88b82b8413818dc1379bd528094";
 const BANDUNG_CENTER = [-6.9175, 107.6191];
 
 const ALERT_DESC = {

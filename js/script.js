@@ -22,16 +22,15 @@ function buildHistFromGeoJSON(data) {
   for (const f of data.features) {
     const p = f.properties;
     const kel = (p.Kelurahan || "").trim().toUpperCase();
-    const kec = (p.Kecamatan || "").trim();
     const tgl = p.Tgl_Kejadian || "";
     if (!kel) continue;
 
     // Hitung frekuensi
     hist[kel] = (hist[kel] || 0) + 1;
 
-    // Kumpulkan detail per kejadian
+    // Kumpulkan detail per kejadian (hanya tanggal, tanpa kecamatan)
     if (!detail[kel]) detail[kel] = [];
-    detail[kel].push({ tgl, kec });
+    detail[kel].push(tgl);
   }
 
   HIST = hist;
@@ -134,7 +133,7 @@ function hitungRisiko(zoneLevel, rainMM, lat, lng) {
     label = "AMAN";
   }
 
-  // Override: jika tidak ada hujan sama sekali, status = AMAN meskipun zona tinggi
+  // Override: jika tidak ada hujan sama sekali, status = AMAN
   if (rainMM === 0) {
     level = "aman";
     label = "AMAN";
@@ -281,7 +280,6 @@ fetch("data/Sungai-Bandung.geojson")
 fetch("data/Historis-Banjir.geojson")
   .then((r) => r.json())
   .then((data) => {
-    // Bangun HIST & HIST_DETAIL dari GeoJSON secara dinamis
     buildHistFromGeoJSON(data);
 
     L.geoJSON(data, {
@@ -526,7 +524,7 @@ function bukaPanel(nama, latlng) {
       alertStatus.textContent = `${hasil.label}`;
       alertDesc.textContent = ALERT_DESC[hasil.level];
 
-      // Perbaikan: hapus backslash escape yang salah pada template literal
+      // Tampilkan riwayat banjir hanya tanggal (tanpa kecamatan)
       factorTable.innerHTML = `
         <div class="ft-row">
           <span class="ft-label">Faktor Fisik</span>  
@@ -544,12 +542,10 @@ function bukaPanel(nama, latlng) {
           const detail = HIST_DETAIL[nama];
           if (!detail || detail.length === 0) return "";
           const rows = detail
-            .map((e) => {
-              const tgl = e.tgl || "—";
-              const lokasi = e.kec ? "Kec. " + e.kec : "";
+            .map((tgl) => {
+              const tanggal = tgl || "—";
               return `<div class="ft-riwayat-item">
-              <span class="ft-riwayat-tgl">${tgl}</span>
-              ${lokasi ? `<span class="ft-riwayat-dampak">${lokasi}</span>` : ""}
+              <span class="ft-riwayat-tgl">${tanggal}</span>
             </div>`;
             })
             .join("");

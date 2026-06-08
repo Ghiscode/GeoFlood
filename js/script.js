@@ -378,7 +378,7 @@ fetch("data/Batas-Wilayah.geojson")
               }[hasil.level];
               this.setTooltipContent(`
                 <div class="tt-name">Kel. ${nama}</div>
-                <div class="tt-alert" style="color:${warna}">● ${hasil.label} poin</div>
+                <div class="tt-alert" style="color:${warna}">● ${hasil.label}</div>
                 <div class="tt-stats">
                   ${kondisiCuaca(w.weather[0].id, rain)} &nbsp;·&nbsp; ${w.main.temp.toFixed(1)}°C<br>
                   💧 ${rain} mm/jam

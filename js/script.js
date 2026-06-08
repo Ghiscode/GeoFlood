@@ -11,42 +11,32 @@ const ALERT_DESC = {
 
 const ZONA_LABEL = { 0: "Aman", 1: "Waspada", 2: "Bahaya" };
 
-// Frekuensi historis banjir per kelurahan
-const HIST = {
-  "MEKAR MULYA": 4,
-  BRAGA: 2,
-  MARGASARI: 2,
-  SUKAMISKIN: 2,
-  RANCANUMPANG: 2,
-  CIBADAK: 2,
-  HEGARMANAH: 2,
-  PAJAJARAN: 2,
-  "KARANG PAMULANG": 2,
-  "ANTAPANI TENGAH": 1,
-  "ANTAPANI WETAN": 1,
-  PASIRLAYUNG: 1,
-  BATUNUNGGAL: 1,
-  CIGADUNG: 1,
-  SUKALUYU: 1,
-  ARJUNA: 1,
-  CIPEDES: 1,
-  PASTEUR: 1,
-  SUKAWARNA: 1,
-  DERWATI: 1,
-  KUJANGSARI: 1,
-  PAKEMITAN: 1,
-  PASANGGRAHAN: 1,
-  PASIRJATI: 1,
-  KOPO: 1,
-  CIPAGANTI: 1,
-  PASIRWANGI: 1,
-  "CISARANTEN KULON": 1,
-  CIBANGKONG: 1,
-  GEGERKALONG: 1,
-  CIJERAH: 1,
-  JAMIKA: 1,
-  CITARUM: 1,
-};
+// HIST & HIST_DETAIL dibangun dinamis dari Historis-Banjir.geojson
+let HIST = {};
+let HIST_DETAIL = {};
+
+function buildHistFromGeoJSON(data) {
+  const hist = {};
+  const detail = {};
+
+  for (const f of data.features) {
+    const p = f.properties;
+    const kel = (p.Kelurahan || "").trim().toUpperCase();
+    const kec = (p.Kecamatan || "").trim();
+    const tgl = p.Tgl_Kejadian || "";
+    if (!kel) continue;
+
+    // Hitung frekuensi
+    hist[kel] = (hist[kel] || 0) + 1;
+
+    // Kumpulkan detail per kejadian
+    if (!detail[kel]) detail[kel] = [];
+    detail[kel].push({ tgl, kec });
+  }
+
+  HIST = hist;
+  HIST_DETAIL = detail;
+}
 
 let dataPompa = [];
 let dataKolam = [];
@@ -144,20 +134,22 @@ function hitungRisiko(zoneLevel, rainMM, lat, lng) {
     label = "AMAN";
   }
 
+  // Override: jika tidak ada hujan sama sekali, status = AMAN meskipun zona tinggi
+  if (rainMM === 0) {
+    level = "aman";
+    label = "AMAN";
+  }
+
   return { level, label, skorAkhir, pemicu, mitigasi };
 }
 
 function kondisiCuaca(id, rain) {
-  if (id >= 200 && id < 300) return "Hujan Petir";
-  if (id >= 300 && id < 600) {
-    if (rain > 10) return "Hujan Lebat";
-    if (rain >= 5) return "Hujan Sedang";
-    return "Hujan Ringan";
-  }
-  if (id >= 600 && id < 800) return "Berawan";
-  if (id === 800) return "Cerah";
+  if (rain > 10) return "Hujan Lebat";
+  if (rain >= 5) return "Hujan Sedang";
+  if (rain > 0) return "Hujan Ringan";
+  if (id === 800) return "Mendung";
   if (id === 801) return "Cerah Berawan";
-  return "Mendung";
+  return "Cerah";
 }
 
 function pointInRing(lng, lat, ring) {
@@ -289,6 +281,9 @@ fetch("data/Sungai-Bandung.geojson")
 fetch("data/Historis-Banjir.geojson")
   .then((r) => r.json())
   .then((data) => {
+    // Bangun HIST & HIST_DETAIL dari GeoJSON secara dinamis
+    buildHistFromGeoJSON(data);
+
     L.geoJSON(data, {
       pane: "paneTitik",
       pointToLayer: (f, latlng) => {
@@ -531,6 +526,7 @@ function bukaPanel(nama, latlng) {
       alertStatus.textContent = `${hasil.label}`;
       alertDesc.textContent = ALERT_DESC[hasil.level];
 
+      // Perbaikan: hapus backslash escape yang salah pada template literal
       factorTable.innerHTML = `
         <div class="ft-row">
           <span class="ft-label">Faktor Fisik</span>  
@@ -540,10 +536,25 @@ function bukaPanel(nama, latlng) {
           <span class="ft-label">Curah Hujan</span>
           <span class="ft-val">${rain} mm/jam</span>
         </div>
-        <div class="ft-row">
+        <div class="ft-row ft-row-riwayat">
           <span class="ft-label">Riwayat Banjir</span>
           <span class="ft-val">${hist > 0 ? hist + "× kejadian" : "Belum tercatat"}</span>
         </div>
+        ${(() => {
+          const detail = HIST_DETAIL[nama];
+          if (!detail || detail.length === 0) return "";
+          const rows = detail
+            .map((e) => {
+              const tgl = e.tgl || "—";
+              const lokasi = e.kec ? "Kec. " + e.kec : "";
+              return `<div class="ft-riwayat-item">
+              <span class="ft-riwayat-tgl">${tgl}</span>
+              ${lokasi ? `<span class="ft-riwayat-dampak">${lokasi}</span>` : ""}
+            </div>`;
+            })
+            .join("");
+          return `<div class="ft-riwayat-detail">${rows}</div>`;
+        })()}
       `;
 
       wStrip.innerHTML = `

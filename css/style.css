@@ -208,15 +208,73 @@ body, html { height: 100%; width: 100%; font-family: var(--font); overflow: hidd
 .alert-block.loading { background: var(--surface-2);    border-color: var(--border); }
 
 .alert-status-row { display: flex; align-items: center; gap: 7px; margin-bottom: 5px; }
+
+/* ========== ANIMASI DENYUT (PULSING) UNTUK BULLET STATUS ========== */
 .alert-dot {
-    width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
     background: var(--text-3);
 }
-.alert-dot.bahaya  { background: var(--c-bahaya);  box-shadow: 0 0 0 3px rgba(220,38,38,.18); animation: blink .8s infinite; }
-.alert-dot.waspada { background: var(--c-waspada); box-shadow: 0 0 0 3px rgba(217,119,6,.18); animation: blink 1.2s infinite; }
-.alert-dot.aman    { background: var(--c-aman); }
 
-@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
+/* Status AMAN - hijau dengan denyut pelan */
+.alert-dot.aman {
+    background: var(--c-aman);
+    box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.7);
+    animation: pulse-green 2s infinite;
+}
+
+@keyframes pulse-green {
+    0% {
+        box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 8px rgba(22, 163, 74, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(22, 163, 74, 0);
+    }
+}
+
+/* Status WASPADA - oranye dengan denyut sedang */
+.alert-dot.waspada {
+    background: var(--c-waspada);
+    box-shadow: 0 0 0 0 rgba(217, 119, 6, 0.7);
+    animation: pulse-orange 1.5s infinite;
+}
+
+@keyframes pulse-orange {
+    0% {
+        box-shadow: 0 0 0 0 rgba(217, 119, 6, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 8px rgba(217, 119, 6, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(217, 119, 6, 0);
+    }
+}
+
+/* Status BAHAYA - merah dengan denyut cepat */
+.alert-dot.bahaya {
+    background: var(--c-bahaya);
+    box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.7);
+    animation: pulse-red 1s infinite;
+}
+
+@keyframes pulse-red {
+    0% {
+        box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 8px rgba(220, 38, 38, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(220, 38, 38, 0);
+    }
+}
+/* ========== END ANIMASI DENYUT ========== */
 
 .alert-status {
     font-size: 13px; font-weight: 700; letter-spacing: .01em;
@@ -301,9 +359,6 @@ body, html { height: 100%; width: 100%; font-family: var(--font); overflow: hidd
     from { opacity: 0; transform: translateY(-6px); }
     to   { opacity: 1; transform: translateY(0); }
 }
-
-
-
 
 /* ═══ MOBILE RESPONSIVE ══════════════════════════════════════════ */
 @media (max-width: 600px) {
@@ -407,4 +462,34 @@ body, html { height: 100%; width: 100%; font-family: var(--font); overflow: hidd
 .leg-range {
     font-size: 9px; color: var(--text-3);
     margin-left: auto; font-family: var(--mono);
+}
+
+/* ── Riwayat banjir detail ───────────────────────────────────── */
+.ft-riwayat-detail {
+    background: var(--surface-2);
+    border: 1px solid var(--border-2);
+    border-radius: 6px;
+    margin: 0 0 4px 0;
+    overflow: hidden;
+}
+.ft-riwayat-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 11px;
+    border-bottom: 1px solid var(--border-2);
+    font-size: 10.5px;
+    gap: 8px;
+}
+.ft-riwayat-item:last-child { border-bottom: none; }
+.ft-riwayat-tgl {
+    font-family: var(--mono);
+    color: var(--text-2);
+    font-size: 10px;
+    flex-shrink: 0;
+}
+.ft-riwayat-dampak {
+    color: var(--text-3);
+    font-size: 10px;
+    text-align: right;
 }

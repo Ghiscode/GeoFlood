@@ -146,8 +146,9 @@ function kondisiCuaca(id, rain) {
   if (rain > 10) return "Hujan Lebat";
   if (rain >= 5) return "Hujan Sedang";
   if (rain > 0) return "Hujan Ringan";
-  if (id === 800) return "Mendung";
-  if (id === 801) return "Cerah Berawan";
+  if (id === 800) return "Cerah";
+  if (id === 801 || id === 802) return "Cerah Berawan";
+  if (id === 803 || id === 804) return "Mendung";
   return "Cerah";
 }
 
